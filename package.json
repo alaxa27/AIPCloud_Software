@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
     "bootstrap": "^4.0.0-alpha.6",
+    "d3-cloud": "^1.2.4",
+    "normalize.css": "^7.0.0",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",

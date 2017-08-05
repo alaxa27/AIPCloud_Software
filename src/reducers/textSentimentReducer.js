@@ -3,11 +3,11 @@ export default function reducer(state={
   fetched: false,
   error: null,
   text_sentiment: {
-    Positif: '0',
-    Neutre: '0',
-    Negatif: '0',
-    Pertinence: '0',
-    Resume: ''
+    positivity: '0',
+    neutrality: '0',
+    negativity: '0',
+    relevance: '0',
+    summary: ''
   }
 }, action) {
   switch(action.type){

@@ -46,9 +46,9 @@ class SentimentAnalysisResults extends Component {
               <div className="row">
                 <div className="col-md-12">
                   <Progress multi>
-                    <Progress bar color="success" value={this.props.textSentiment.Positif}/>
-                    <Progress bar color="muted" value={this.props.textSentiment.Neutre}/>
-                    <Progress bar color="danger" value={this.props.textSentiment.Negatif}/>
+                    <Progress bar color="success" value={this.props.textSentiment.positivity}/>
+                    <Progress bar color="muted" value={this.props.textSentiment.neutrality}/>
+                    <Progress bar color="danger" value={this.props.textSentiment.negativity}/>
                   </Progress>
                 </div>
               </div>
@@ -63,7 +63,7 @@ class SentimentAnalysisResults extends Component {
                         <PopoverItem key={0} item={this.state.popovers[0]} id={0}/>
                       </div>
                     </div>
-                    <strong className="h4">{this.props.textSentiment.Positif}
+                    <strong className="h4">{this.props.textSentiment.positivity}
                       %</strong>
                     <div className="chart-wrapper">
                       <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
@@ -80,7 +80,7 @@ class SentimentAnalysisResults extends Component {
                         <PopoverItem key={1} item={this.state.popovers[1]} id={1}/>
                       </div>
                     </div>
-                    <strong className="h4">{this.props.textSentiment.Neutre}
+                    <strong className="h4">{this.props.textSentiment.neutrality}
                       %</strong>
                     <div className="chart-wrapper">
                       <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
@@ -97,7 +97,7 @@ class SentimentAnalysisResults extends Component {
                         <PopoverItem key={2} item={this.state.popovers[2]} id={2}/>
                       </div>
                     </div>
-                    <strong className="h4">{this.props.textSentiment.Negatif}
+                    <strong className="h4">{this.props.textSentiment.negativity}
                       %</strong>
                     <div className="chart-wrapper">
                       <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
@@ -116,14 +116,14 @@ class SentimentAnalysisResults extends Component {
                     <PopoverItem key={3} item={this.state.popovers[3]} id={3}/>
                   </div>
                 </div>
-                <strong className="h1">{this.props.textSentiment.Pertinence}
+                <strong className="h1">{this.props.textSentiment.relevance}
                   %</strong>
                 <div className="chart-wrapper">
                   <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
                 </div>
               </div>
               <div className="col">
-                {this.props.textSentiment.Resume}
+                {this.props.textSentiment.summary}
               </div>
             </div>
           </div>

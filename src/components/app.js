@@ -20,7 +20,9 @@ class App extends Component {
 
   render() {
     return (
-          <SentimentAnalysis />
+      <div>
+        <SentimentAnalysis />
+      </div>
     );
   }
 }
