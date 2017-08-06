@@ -39,6 +39,7 @@ export default class WordCloud extends Component {
    * @return {void}
    */
   onSelectTopic(topic) {
+    this.props.updateSelectedTopic(topic)
     this.setState({
       selectedTopic: topic,
     });
@@ -55,6 +56,7 @@ export default class WordCloud extends Component {
       height,
       topics,
       width,
+      updateSelectedTopic
     } = this.props;
 
     if (topics.length === 0) {

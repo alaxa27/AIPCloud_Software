@@ -1,18 +1,18 @@
 import axios from 'axios'
 
-export function fetchKeywordExtraction(text) {
+export function fetchWordSentiment(word) {
+  //Need AJAX Here. If it works I think I need to dispatch another action.
+  // Let's say GET_TEXT_SENTIMENT_FULFILLED...
   return function(dispatch) {
 
     dispatch({
-      type: "FETCH_KEYWORD_EXTRACTION"
+      type: "FETCH_WORD_SENTIMENT"
     })
 
-    axios("http://35.189.98.76/analyze/extraction", {
+    axios("http://35.189.98.76/analyze/word", {
         method: 'post',
         data: {
-          sentiment: "1",
-          volume: "0.7",
-          text: text
+          word: word
         },
         auth: {
           username: 'text@jdc.fr',
@@ -23,14 +23,14 @@ export function fetchKeywordExtraction(text) {
       .then((res) => {
         console.log("Response", res);
         dispatch({
-          type: "FETCH_KEYWORD_EXTRACTION_FULFILLED",
+          type: "FETCH_WORD_SENTIMENT_FULFILLED",
           payload: res.data
         })
       })
       .catch((err) => {
         console.log(err);
         dispatch({
-          type: "FETCH_KEYWORD_EXTRACTION_REJECTED",
+          type: "FETCH_WORD_SENTIMENT_SENTIMENT_REJECTED",
           payload: err
         })
       })

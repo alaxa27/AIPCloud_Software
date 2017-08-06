@@ -16,11 +16,17 @@ export default function reducer(state={
           "id": "1751295897__" + e.keyword,
           "label": e.keyword,
           "volume": e.score,
+          "sentiment": {
+            "positive": e.sentiment.positivity,
+            "neutral": e.sentiment.neutrality,
+            "negative": e.sentiment.negativity
+          },
+          "sentimentScore": e.sentiment.relevance
         })
       })
       extract.push({
             "id": "1751295897__Béfezkflin",
-            "label": "Beéin",
+            "label": "",
             "volume": 1,
         })
       console.log(extract);

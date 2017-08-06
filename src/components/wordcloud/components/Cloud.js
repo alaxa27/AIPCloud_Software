@@ -68,7 +68,7 @@ export default class Cloud extends Component {
     if (this.state.isProcessing) {
       return (
         <div className="wordcloud__container_cloud">
-          <span >Loading...</span>
+          <span >Chargement...</span>
         </div>
       );
     }
@@ -98,6 +98,8 @@ export default class Cloud extends Component {
       }
       return classNames;
     };
+    // Put a the end of render if needed
+        // {topics.length > this.state.cloudDimensions.length ? <p className="worcloud__hint">Some topics cannot be displayed, because of the available space.</p> : ''}
 
     return (
       <div className="wordcloud__container_cloud">
@@ -120,7 +122,6 @@ export default class Cloud extends Component {
             </g>
           </svg>
         </div>
-        {topics.length > this.state.cloudDimensions.length ? <p className="worcloud__hint">Some topics cannot be displayed, because of the available space.</p> : ''}
       </div>
     );
   }

@@ -87,6 +87,7 @@ class SentimentAnalysis extends Component {
 
                 <Collapse isOpen={this.props.fetched || this.props.fetching}>
                   <SentimentAnalysisResults />
+                  <hr className="mt-0"/>
                   <KeywordExtractionResults />
                 </Collapse>
               </div>
