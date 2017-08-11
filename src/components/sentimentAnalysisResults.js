@@ -6,7 +6,9 @@ import { Progress } from 'reactstrap'
 import PopoverItem from './popoverItem'
 
 const mapStateToProps = function(state) {
-  return {textSentiment: state.textSentiment.text_sentiment}
+  return {
+    textSentiment: state.textSentiment.text_sentiment
+  }
 }
 
 class SentimentAnalysisResults extends Component {

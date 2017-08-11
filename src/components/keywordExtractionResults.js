@@ -24,6 +24,14 @@ class KeywordExtractionResults extends Component {
       selectedTopic: topic,
     });
   }
+  // Add this to get sidebar with extract detail
+  // <div className="col">
+  //   {this.props.fetched ?
+  //   <Sidebar
+  //     topic={this.state.selectedTopic}
+  //     />
+  //   : null }
+  // </div>
 
   render() {
     var props = {
@@ -43,13 +51,6 @@ class KeywordExtractionResults extends Component {
             <WordCloud
               {...props}
             />
-        </div>
-        <div className="col">
-          {this.props.fetched ?
-          <Sidebar
-            topic={this.state.selectedTopic}
-            />
-          : null }
         </div>
       </div>
 

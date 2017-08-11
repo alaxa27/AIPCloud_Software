@@ -81,9 +81,14 @@ export default class Cloud extends Component {
     const getClassNames = (item) => {
       let classNames = 'wordcloud__cloud_label';
 
-      if (item.sentimentScore > 60) {
+      const negative = item.sentiment.negative
+      const positive = item.sentiment.positive
+      const neutral = item.sentiment.neutral
+      const max = Math.max(Math.max(positive, negative), neutral)
+
+      if (item.sentiment.positive === max) {
         classNames += ' wordcloud__cloud_label--color-green';
-      } else if (item.sentimentScore < 40) {
+      } else if (item.sentiment.negative === max) {
         classNames += ' wordcloud__cloud_label--color-red';
       } else {
         classNames += ' wordcloud__cloud_label--color-grey';
@@ -101,29 +106,31 @@ export default class Cloud extends Component {
     // Put a the end of render if needed
         // {topics.length > this.state.cloudDimensions.length ? <p className="worcloud__hint">Some topics cannot be displayed, because of the available space.</p> : ''}
 
-    return (
-      <div className="wordcloud__container_cloud">
-        <div className="wordcloud__cloud">
-          <svg width={width} height={height}>
-            <g transform={`translate(${width / 2}, ${height / 2})`}>
-              {this.state.cloudDimensions.map(item =>
-                <text
-                  className={getClassNames(item)}
-                  key={item.id}
-                  onClick={() => onSelectTopic(item)}
-                  style={{
-                    fontSize: item.size,
-                    fontFamily: fontName,
-                  }}
-                  textAnchor="middle"
-                  transform={`translate(${item.x} , ${item.y} )`}
-                >{item.text}</text>
-              )}
-            </g>
-          </svg>
+    if (!this.state.isProcessing){
+      return (
+        <div className="wordcloud__container_cloud">
+          <div className="wordcloud__cloud">
+            <svg width={width} height={height}>
+              <g transform={`translate(${width / 2}, ${height / 2})`}>
+                {this.state.cloudDimensions.map(item =>
+                  <text
+                    className={getClassNames(item)}
+                    key={item.id}
+                    onClick={() => onSelectTopic(item)}
+                    style={{
+                      fontSize: item.size,
+                      fontFamily: fontName,
+                    }}
+                    textAnchor="middle"
+                    transform={`translate(${item.x} , ${item.y} )`}
+                  >{item.text}</text>
+                )}
+              </g>
+            </svg>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

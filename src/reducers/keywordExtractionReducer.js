@@ -6,7 +6,7 @@ export default function reducer(state={
 }, action) {
   switch(action.type){
     case "FETCH_KEYWORD_EXTRACTION": {
-      return {...state, fetching: true, fetched: false}
+      return {...state, fetching: true, fetched: false, extract:[]}
     }
     case "FETCH_KEYWORD_EXTRACTION_FULFILLED": {
       const extract = [];
@@ -28,6 +28,11 @@ export default function reducer(state={
             "id": "1751295897__Béfezkflin",
             "label": "",
             "volume": 1,
+            "sentiment": {
+              "positive": 0,
+              "negative": 0,
+              "neutral": 0
+            }
         })
       console.log(extract);
       return {...state, fetching: false, fetched: true, extract: extract}
