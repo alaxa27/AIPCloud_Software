@@ -11,17 +11,15 @@ export default function reducer(state={
     case "FETCH_KEYWORD_EXTRACTION_FULFILLED": {
       const extract = [];
       action.payload.map(e => {
-        e.score *= 10000;
         extract.push({
           "id": "1751295897__" + e.keyword,
+          "volume": Math.round(e.score * 10000),
           "label": e.keyword,
-          "volume": e.score,
           "sentiment": {
-            "positive": e.sentiment.positivity,
-            "neutral": e.sentiment.neutrality,
-            "negative": e.sentiment.negativity
-          },
-          "sentimentScore": e.sentiment.relevance
+            "positive": parseFloat((e.sentiment.positivity * 100).toFixed(2)),
+            "neutral": parseFloat((e.sentiment.neutrality * 100).toFixed(2)),
+            "negative": parseFloat((e.sentiment.negativity * 100).toFixed(2))
+          }
         })
       })
       extract.push({
@@ -34,7 +32,6 @@ export default function reducer(state={
               "neutral": 0
             }
         })
-      console.log(extract);
       return {...state, fetching: false, fetched: true, extract: extract}
     }
     case "FETCH_KEYWORD_EXTRACTION_REJECTED": {

@@ -3,6 +3,7 @@ import React, {
   PropTypes,
 } from 'react';
 
+import { UncontrolledTooltip } from 'reactstrap';
 import {
   enrichTopics,
 } from '../utils/dataprocessor';
@@ -116,6 +117,7 @@ export default class Cloud extends Component {
                   <text
                     className={getClassNames(item)}
                     key={item.id}
+                    id={item.id}
                     onClick={() => onSelectTopic(item)}
                     style={{
                       fontSize: item.size,
@@ -124,6 +126,11 @@ export default class Cloud extends Component {
                     textAnchor="middle"
                     transform={`translate(${item.x} , ${item.y} )`}
                   >{item.text}</text>
+                )}
+                {this.state.cloudDimensions.map(item =>
+                  <UncontrolledTooltip placement="top" target={item.id}>
+                    Importance: {item.volume}
+                  </UncontrolledTooltip>
                 )}
               </g>
             </svg>

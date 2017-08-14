@@ -1,19 +1,26 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Collapse} from 'reactstrap';
+import {Collapse, Nav, NavItem, NavLink} from 'reactstrap';
+import classnames from 'classnames'
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
-import {fetchTextSentiment} from '../actions/textSentimentActions';
-import {fetchKeywordExtraction} from '../actions/keywordExtractionActions';
+import { fetchTextSentiment } from '../actions/textSentimentActions';
+import { fetchKeywordExtraction } from '../actions/keywordExtractionActions';
+import { fetchCustomerAnalysis } from '../actions/customerAnalysisActions';
 
-import SentimentAnalysisResults from './sentimentAnalysisResults'
-import KeywordExtractionResults from './keywordExtractionResults'
+import SentimentAnalysisResults from './sentimentAnalysisResults';
+import KeywordExtractionResults from './keywordExtractionResults';
+import CustomerAnalysisResults from './customerAnalysisResults';
 
 const mapStateToProps = function(state) {
   return {
-    fetched: (state.keywordExtraction.fetched && state.textSentiment.fetched),
-    fetching: (state.keywordExtraction.fetching || state.textSentiment.fetching)
+    sentimentFetched: state.textSentiment.fetched,
+    sentimentFetching: state.textSentiment.fetching,
+    keywordsFetched: state.keywordExtraction.fetched,
+    keywordsFetching: state.keywordExtraction.fetching,
+    customerFetched: state.customerAnalysis.fetched,
+    customerFetching: state.customerAnalysis.fetching
   }
 }
 
@@ -46,16 +53,23 @@ class SentimentAnalysis extends Component {
     })
   }
 
-  fetchAnalyze() {
+  fetchSentiment() {
     this.props.dispatch(fetchTextSentiment(this.state.textAreaInput))
+  }
+
+  fetchKeywords() {
     this.props.dispatch(fetchKeywordExtraction(this.state.textAreaInput))
+  }
+
+  fetchCustomer() {
+    this.props.dispatch(fetchCustomerAnalysis(this.state.textAreaInput))
   }
 
   render() {
     return (
       <div classname="row">
         <div className="col-md-12">
-          <BlockUi tag="div" blocking={this.props.fetching}>
+          <BlockUi tag="div" blocking={this.props.sentimentFetching || this.props.keywordsFetching || this.props.customerFetching}>
             <div className="card">
               <h4 className="card-header card-title">
                 Tester notre service
@@ -70,7 +84,7 @@ class SentimentAnalysis extends Component {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchAnalyze.bind(this)}>Analyser !</button>
+                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchSentiment.bind(this)}>Extraire le sentiment!</button>
                   </div>
                   <div className="col"></div>
                   <div className="col"></div>
@@ -83,12 +97,28 @@ class SentimentAnalysis extends Component {
 
                 <hr className="mt-0"/>
 
-                <br/>
+                <br />
 
-                <Collapse isOpen={this.props.fetched || this.props.fetching}>
+                <Collapse isOpen={this.props.sentimentFetched || this.props.sentimentFetching}>
                   <SentimentAnalysisResults />
+                  {this.props.sentimentFetched && !(this.props.keywordsFetched || this.props.keywordsFetching) ?
+                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchKeywords.bind(this)}>Extraire des mots clés</button>
+                    : null
+                  }
+                </Collapse>
+                <Collapse isOpen={this.props.keywordsFetched || this.props.keywordsFetching}>
+                  <br />
                   <hr className="mt-0"/>
                   <KeywordExtractionResults />
+                  {this.props.keywordsFetched && !(this.props.customerFetched || this.props.customerFetching) ?
+                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchCustomer.bind(this)}>Extraire l'intention</button>
+                    : null
+                  }
+                </Collapse>
+                <Collapse isOpen={this.props.customerFetched || this.props.customerFetching}>
+                  <br />
+                  <hr className="mt-0"/>
+                  <CustomerAnalysisResults />
                 </Collapse>
               </div>
             </div>

@@ -60,7 +60,7 @@ export default class WordCloud extends Component {
     } = this.props;
 
     if (topics.length === 0) {
-      return (<span>No topics available.</span>);
+      return (<span></span>);
     }
     //Add this under section to get a title
     // <h1 className="wordcloud__title">WordCloud</h1>

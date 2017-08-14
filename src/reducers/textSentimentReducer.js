@@ -17,6 +17,10 @@ export default function reducer(state={
       return {...state, fetching: true, fetched: false, text_sentiment: text_sentiment}
     }
     case "FETCH_TEXT_SENTIMENT_FULFILLED": {
+      action.payload.positivity = (action.payload.positivity * 100).toFixed(2);
+      action.payload.neutrality = (action.payload.neutrality * 100).toFixed(2);
+      action.payload.negativity = (action.payload.negativity * 100).toFixed(2);
+      action.payload.relevance = (action.payload.relevance * 100).toFixed(2);
       return {...state, fetching: false, fetched: true, text_sentiment: action.payload}
     }
     case "FETCH_TEXT_SENTIMENT_REJECTED": {

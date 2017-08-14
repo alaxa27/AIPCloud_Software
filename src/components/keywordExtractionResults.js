@@ -24,14 +24,6 @@ class KeywordExtractionResults extends Component {
       selectedTopic: topic,
     });
   }
-  // Add this to get sidebar with extract detail
-  // <div className="col">
-  //   {this.props.fetched ?
-  //   <Sidebar
-  //     topic={this.state.selectedTopic}
-  //     />
-  //   : null }
-  // </div>
 
   render() {
     var props = {
@@ -45,6 +37,13 @@ class KeywordExtractionResults extends Component {
       initialHighlight: true, // If true, activates topmost topic and loads its data to the table, otherwise table is empty
       updateSelectedTopic: this.updateSelectedTopic
     };
+    // <div className="col">
+    //   {this.props.fetched ?
+    //     <Sidebar
+    //       topic={this.state.selectedTopic}
+    //       />
+    //     : null }
+    //   </div>
     return (
       <div className="row">
         <div className="col">
