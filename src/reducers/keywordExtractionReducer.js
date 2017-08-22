@@ -1,3 +1,13 @@
+import 'axios'
+
+// export function resetCustomerAnalysis() {
+//   return function(dispatch) {
+//     dispatch({
+//       type: "RESET_CUSTOMER_ANALYSIS"
+//     })
+//   }
+// }
+
 export default function reducer(state={
   fetching: false,
   fetched: false,
@@ -39,6 +49,12 @@ export default function reducer(state={
       fetching: false,
       fetched: false,
       error: action.payload}
+    }
+    case "RESET_KEYWORD_EXTRACTION": {
+      return {...state,
+      fetching: false,
+      fetched: false,
+      extract: []}
     }
     default: {
       return {...state}

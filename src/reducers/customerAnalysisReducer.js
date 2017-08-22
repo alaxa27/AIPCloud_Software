@@ -26,6 +26,12 @@ export default function reducer(state={
       fetched: false,
       error: action.payload}
     }
+    case "RESET_CUSTOMER_ANALYSIS": {
+      return {...state,
+      fetching: false,
+      fetched: false,
+      analysis: analysis}
+    }
     default: {
       return {...state}
     }

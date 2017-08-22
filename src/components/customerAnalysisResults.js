@@ -2,6 +2,7 @@ import {Doughnut} from 'react-chartjs-2';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Radar, Chart } from 'react-chartjs-2';
+import { Progress } from 'reactstrap';
 
 
 const mapStateToProps = function(state) {
@@ -39,12 +40,32 @@ class CustomerAnalysisResults extends Component {
     };
 
     return (
-      <div className="row">
-        <div className="col">
-          <Radar  data={radar} options={options} height="50" redraw />
-        </div>
-      </div>
-
+      <ul className="horizontal-bars type-2">
+        <li>
+          <i className="icon-user"></i>
+          <span className="title">Sentiment</span>
+          <span className="value">{this.props.analysis.sentiment}%</span>
+          <div className="bars">
+            <Progress className="progress-sm" color="info" value={this.props.analysis.sentiment}/>
+          </div>
+        </li>
+        <li>
+          <i className="fa fa-bomb"></i>
+          <span className="title">Agressivité</span>
+          <span className="value">{this.props.analysis.agressivity}%</span>
+          <div className="bars">
+            <Progress className="progress-sm" color="info" value={this.props.analysis.agressivity}/>
+          </div>
+        </li>
+        <li>
+          <i className="fa fa-money"></i>
+          <span className="title">Remboursement</span>
+          <span className="value">{this.props.analysis.refund}%</span>
+          <div className="bars">
+            <Progress className="progress-sm" color="info" value={this.props.analysis.refund}/>
+          </div>
+        </li>
+      </ul>
     );
   }
 }

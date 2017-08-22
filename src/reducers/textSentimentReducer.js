@@ -1,3 +1,12 @@
+import 'axios'
+
+// export function resetCustomerAnalysis() {
+//   return function(dispatch) {
+//     dispatch({
+//       type: "RESET_CUSTOMER_ANALYSIS"
+//     })
+//   }
+// }
 
 const text_sentiment= {
   positivity: '0',
@@ -28,6 +37,12 @@ export default function reducer(state={
       fetching: false,
       fetched: false,
       error: action.payload}
+    }
+    case "RESET_TEXT_SENTIMENT": {
+      return {...state,
+      fetching: false,
+      fetched: false,
+      text_sentiment: text_sentiment}
     }
     default: {
       return {...state}

@@ -7012,6 +7012,11 @@ body {
     .btn-vimeo:hover::before {
       background: #93c130; }
 
+.btn-opener {
+  border-radius: 15px 15px 0px 0px;
+  border-bottom-color: transparent;
+  margin-bottom: -23px; }
+
 .callout {
   position: relative;
   padding: 0 1rem;
@@ -8906,7 +8911,9 @@ hr.transparent {
     margin-left: 1rem; }
   *[dir="rtl"] .horizontal-bars.type-2 li .value {
     float: left;
-    font-weight: 600; }
+    font-weight: 599;
+    font-size: 32px;
+    margin-top: 7px; }
   *[dir="rtl"] .horizontal-bars.type-2 li .bars {
     padding: 0; }
   *[dir="rtl"] .icons-list li {

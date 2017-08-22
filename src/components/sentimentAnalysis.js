@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Collapse, Nav, NavItem, NavLink} from 'reactstrap';
+import {Collapse, Nav, NavItem, NavLink, Row, Col, Button} from 'reactstrap';
 import classnames from 'classnames'
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
@@ -46,6 +46,7 @@ class SentimentAnalysis extends Component {
   }
 
   ontextAreaInputChange(e) {
+    this.resetAnalyzes()
     this.setState({
       textAreaInput: e.target.value,
       words: e.target.value.split(' ').length - 1,
@@ -53,7 +54,22 @@ class SentimentAnalysis extends Component {
     })
   }
 
+  resetAnalyzes() {
+    this.props.dispatch({
+      type:"RESET_TEXT_SENTIMENT"
+    })
+    this.props.dispatch({
+      type:"RESET_KEYWORD_EXTRACTION"
+    })
+    this.props.dispatch({
+      type:"RESET_CUSTOMER_ANALYSIS"
+    })
+  }
+
   fetchSentiment() {
+    if (this.props.sentimentFetched) {
+      this.resetAnalyzes()
+    }
     this.props.dispatch(fetchTextSentiment(this.state.textAreaInput))
   }
 
@@ -84,7 +100,7 @@ class SentimentAnalysis extends Component {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchSentiment.bind(this)}>Extraire le sentiment!</button>
+                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchSentiment.bind(this)}>Tester le service !</button>
                   </div>
                   <div className="col"></div>
                   <div className="col"></div>
@@ -99,23 +115,34 @@ class SentimentAnalysis extends Component {
 
                 <br />
 
-                <Collapse isOpen={this.props.sentimentFetched || this.props.sentimentFetching}>
+                <Collapse isOpen={this.props.sentimentFetching || this.props.sentimentFetched}>
                   <SentimentAnalysisResults />
-                  {this.props.sentimentFetched && !(this.props.keywordsFetched || this.props.keywordsFetching) ?
-                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchKeywords.bind(this)}>Extraire des mots clés</button>
-                    : null
-                  }
+                  <Row>
+                    <Col sm={{ size: 1, push: 0, pull: 0, offset: 6}}>
+                      {this.props.sentimentFetched && !(this.props.keywordsFetched || this.props.keywordsFetching) ?
+                        <Button outline type="submit" size="md" className="btn-opener fa-chevron-down" onClick={this.fetchKeywords.bind(this)}>
+                        </Button>
+                        : null
+                      }
+                    </Col>
+                  </Row>
+
                 </Collapse>
-                <Collapse isOpen={this.props.keywordsFetched || this.props.keywordsFetching}>
+                <Collapse isOpen={(this.props.keywordsFetched || this.props.keywordsFetching) && this.props.sentimentFetched}>
                   <br />
                   <hr className="mt-0"/>
                   <KeywordExtractionResults />
-                  {this.props.keywordsFetched && !(this.props.customerFetched || this.props.customerFetching) ?
-                    <button type="submit" className="btn btn-sm btn-primary" onClick={this.fetchCustomer.bind(this)}>Extraire l'intention</button>
-                    : null
-                  }
+                  <Row>
+                    <Col sm={{ size: 1, push: 0, pull: 0, offset: 6}}>
+                      {this.props.keywordsFetched && !(this.props.customerFetched || this.props.customerFetching) ?
+                        <Button outline type="submit" size="md" className="btn-opener fa-chevron-down" onClick={this.fetchCustomer.bind(this)}>
+                        </Button>
+                        : null
+                      }
+                    </Col>
+                  </Row>
                 </Collapse>
-                <Collapse isOpen={this.props.customerFetched || this.props.customerFetching}>
+                <Collapse isOpen={(this.props.customerFetched || this.props.customerFetching) && this.props.sentimentFetched && this.props.keywordsFetched}>
                   <br />
                   <hr className="mt-0"/>
                   <CustomerAnalysisResults />
