@@ -26,7 +26,7 @@ const mapStateToProps = function(state) {
 
 const textAreaInput = "Ce sont mille chemins différents qui nous ont conduits ici aujourd’hui, vous et moi, animés par le même désir de servir. Et même si ce désir n’a pas le même visage, pas la même forme, même s’il n’emporte pas les mêmes conséquences, nous en connaissons vous et moi la source : le simple amour de la patrie. Certains font de la politique depuis longtemps ; pour d’autres, au nombre desquels je me range, c’est loin d’être le cas. Vous soutiendrez ou vous combattrez, selon vos convictions, le gouvernement que j’ai nommé. Mais à la fin nous savons tous que quelque chose de très profond nous réunit, nous anime et nous engage. Oui, le simple amour de la patrie - que celle-ci s’incarne dans la solitude des collines de Haute Provence ou des Ardennes, dans la tristesse des grands ensembles où une partie de notre jeunesse s’abîme, dans la campagne parfois dure à vivre et à travailler, dans les déserts industriels, mais aussi dans la gaieté surprenante des commencements. De cet amour nous tirons tous, je crois, la même impatience, qui est une impatience d’agir. Elle prend parfois les traits de l’optimisme volontaire, d’autres fois ceux d’une colère sincère. Toujours elle découle de cette même origine."
 
-class SentimentAnalysis extends Component {
+class TestCard extends Component {
   constructor(props) {
     super(props);
 
@@ -156,4 +156,4 @@ class SentimentAnalysis extends Component {
   }
 }
 
-export default connect(mapStateToProps)(SentimentAnalysis);
+export default connect(mapStateToProps)(TestCard);

@@ -109,21 +109,23 @@ class SentimentAnalysisResults extends Component {
               </div>
             </div>
             <div className="col-md-3">
-              <div className="callout callout-success">
-                <div className="row">
-                  <div className="col">
-                    <small className="text-muted">Pertinence</small><br/>
+              {this.props.textSentiment.relevance == "NaN"? null :
+                <div className="callout callout-success">
+                  <div className="row">
+                    <div className="col">
+                      <small className="text-muted">Pertinence</small><br/>
+                    </div>
+                    <div className="col">
+                      <PopoverItem key={3} item={this.state.popovers[3]} id={3}/>
+                    </div>
                   </div>
-                  <div className="col">
-                    <PopoverItem key={3} item={this.state.popovers[3]} id={3}/>
+                  <strong className="h1">{this.props.textSentiment.relevance}
+                    %</strong>
+                  <div className="chart-wrapper">
+                    <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
                   </div>
                 </div>
-                <strong className="h1">{this.props.textSentiment.relevance}
-                  %</strong>
-                <div className="chart-wrapper">
-                  <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
-                </div>
-              </div>
+              }
               <div className="col">
                 {this.props.textSentiment.summary}
               </div>

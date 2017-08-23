@@ -25,11 +25,16 @@ export default function reducer(state={
           "id": "1751295897__" + e.keyword,
           "volume": Math.round(e.score * 10000),
           "label": e.keyword,
-          "sentiment": {
-            "positive": parseFloat((e.sentiment.positivity * 100).toFixed(2)),
-            "neutral": parseFloat((e.sentiment.neutrality * 100).toFixed(2)),
-            "negative": parseFloat((e.sentiment.negativity * 100).toFixed(2))
-          }
+          "sentiment" : (e.sentiment ?
+            {
+              "positive": parseFloat((e.sentiment.positivity * 100).toFixed(2)),
+              "neutral": parseFloat((e.sentiment.neutrality * 100).toFixed(2)),
+              "negative": parseFloat((e.sentiment.negativity * 100).toFixed(2))
+            }:{
+              "positive": 0,
+              "negative": 0,
+              "neutral": 10
+            })
         })
       })
       extract.push({

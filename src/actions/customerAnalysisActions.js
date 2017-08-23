@@ -24,7 +24,7 @@ export function fetchCustomerAnalysis(text) {
         },
         auth: {
           username: 'text@jdc.fr',
-          password: '$6$rounds=656000$u.RnnlI4oak01pUt$MYGGNaetg5t18d3/20oS4Hg.HaoNurBrlvbt3uTmdzEctagNnCM1C1FjXEtQduXwMY1aN1z0rfEUpNBM5hxsF1'
+          password: 'jdc'
         }
 
       })

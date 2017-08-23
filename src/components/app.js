@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import SentimentAnalysis from './sentimentAnalysis'
+import TestCard from './testCard'
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SentimentAnalysis />
+        <TestCard />
       </div>
     );
   }
