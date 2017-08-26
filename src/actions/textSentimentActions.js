@@ -15,7 +15,7 @@ export function fetchTextSentiment(text) {
       type: "FETCH_TEXT_SENTIMENT"
     })
 
-    axios("http://35.189.98.76/analyze/" + textType, {
+    axios("https://aipcloud.sakme.ch/analyze/" + textType, {
         method: 'post',
         data: {
           text: text,

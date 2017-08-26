@@ -7,7 +7,7 @@ export function fetchKeywordExtraction(text) {
       type: "FETCH_KEYWORD_EXTRACTION"
     })
 
-    axios("http://35.189.98.76/analyze/extraction", {
+    axios("https://aipcloud.sakme.ch/analyze/extraction", {
         method: 'post',
         data: {
           sentiment: "0",

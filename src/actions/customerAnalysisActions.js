@@ -17,7 +17,7 @@ export function fetchCustomerAnalysis(text) {
       type: "FETCH_CUSTOMER_ANALYSIS"
     })
 
-    axios("http://35.189.98.76/analyze/customer", {
+    axios("https://aipcloud.sakme.ch/analyze/customer", {
         method: 'post',
         data: {
           text: text
