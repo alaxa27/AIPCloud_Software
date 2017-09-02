@@ -20,7 +20,7 @@ class CustomerAnalysisResults extends Component {
 
   render() {
     const radar = {
-      labels: ['Sentiment', 'Aggressivité', 'Remboursement'],
+      labels: ['satisfaction', 'Aggressivité', 'Remboursement'],
       datasets: [
         {
           data: [this.props.analysis.sentiment, this.props.analysis.agressivity, this.props.analysis.refund]
@@ -43,10 +43,10 @@ class CustomerAnalysisResults extends Component {
       <ul className="horizontal-bars type-2">
         <li>
           <i className="icon-user"></i>
-          <span className="title">Sentiment</span>
-          <span className="value">{this.props.analysis.sentiment}%</span>
+          <span className="title">Satisfaction</span>
+          <span className="value">{this.props.analysis.satisfaction}%</span>
           <div className="bars">
-            <Progress className="progress-sm" color="info" value={this.props.analysis.sentiment}/>
+            <Progress className="progress-sm" color="info" value={this.props.analysis.satisfaction}/>
           </div>
         </li>
         <li>

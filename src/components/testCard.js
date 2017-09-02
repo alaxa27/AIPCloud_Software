@@ -8,10 +8,12 @@ import 'react-block-ui/style.css';
 import { fetchTextSentiment } from '../actions/textSentimentActions';
 import { fetchKeywordExtraction } from '../actions/keywordExtractionActions';
 import { fetchCustomerAnalysis } from '../actions/customerAnalysisActions';
+import { fetchIntentAnalysis } from '../actions/intentAnalysisActions';
 
 import SentimentAnalysisResults from './sentimentAnalysisResults';
 import KeywordExtractionResults from './keywordExtractionResults';
 import CustomerAnalysisResults from './customerAnalysisResults';
+import IntentAnalysisResults from './intentAnalysisResults';
 
 const mapStateToProps = function(state) {
   return {
@@ -20,7 +22,9 @@ const mapStateToProps = function(state) {
     keywordsFetched: state.keywordExtraction.fetched,
     keywordsFetching: state.keywordExtraction.fetching,
     customerFetched: state.customerAnalysis.fetched,
-    customerFetching: state.customerAnalysis.fetching
+    customerFetching: state.customerAnalysis.fetching,
+    intentFetched: state.intentAnalysis.fetched,
+    intentFetching: state.intentAnalysis.fetching
   }
 }
 
@@ -64,6 +68,9 @@ class TestCard extends Component {
     this.props.dispatch({
       type:"RESET_CUSTOMER_ANALYSIS"
     })
+    this.props.dispatch({
+      type:"RESET_INTENT_ANALYSIS"
+    })
   }
 
   fetchSentiment() {
@@ -77,8 +84,13 @@ class TestCard extends Component {
     this.props.dispatch(fetchKeywordExtraction(this.state.textAreaInput))
   }
 
+  fetchIntent() {
+    this.props.dispatch(fetchIntentAnalysis(this.state.textAreaInput))
+  }
+
   fetchCustomer() {
     this.props.dispatch(fetchCustomerAnalysis(this.state.textAreaInput))
+    this.fetchIntent()
   }
 
   render() {
@@ -110,6 +122,7 @@ class TestCard extends Component {
                 </div>
 
                 <br/>
+
 
                 <hr className="mt-0"/>
 
@@ -145,7 +158,14 @@ class TestCard extends Component {
                 <Collapse isOpen={(this.props.customerFetched || this.props.customerFetching) && this.props.sentimentFetched && this.props.keywordsFetched}>
                   <br />
                   <hr className="mt-0"/>
-                  <CustomerAnalysisResults />
+                  <Row>
+                    <Col>
+                      <CustomerAnalysisResults />
+                    </Col>
+                    <Col>
+                      <IntentAnalysisResults />
+                    </Col>
+                  </Row>
                 </Collapse>
               </div>
             </div>
