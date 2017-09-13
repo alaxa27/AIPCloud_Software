@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import TestCard from './testCard'
-import EmailsAnalysis from './emails/emailsAnalysis'
+// import EmailsAnalysis from './emails/emailsAnalysis'
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class App extends Component {
   }
 
 
+  // <Route path="/emails" name="Emails" component={EmailsAnalysis}/>
   render() {
     const history = createBrowserHistory();
 
@@ -27,7 +28,6 @@ class App extends Component {
       <HashRouter history={history}>
         <Switch>
           <Route path="/test" name="Test" component={TestCard}/>
-          <Route path="/emails" name="Emails" component={EmailsAnalysis}/>
           <Redirect from="/" to="/test"/>
         </Switch>
       </HashRouter>

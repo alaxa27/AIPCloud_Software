@@ -17,14 +17,14 @@ export function fetchIntentAnalysis(text) {
       type: "FETCH_INTENT_ANALYSIS"
     })
 
-    axios("https://aipcloud.sakme.ch/analyze/intent", {
+    axios("https://api.aipcloud.io/analyze/intent", {
         method: 'post',
         data: {
           text: text
         },
         auth: {
-          username: 'text@jdc.fr',
-          password: 'jdc'
+          username: 'test1@jdc.fr',
+          password: 'dfgdfg1.'
         }
 
       })

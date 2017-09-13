@@ -7,7 +7,7 @@ export function fetchKeywordExtraction(text) {
       type: "FETCH_KEYWORD_EXTRACTION"
     })
 
-    axios("https://aipcloud.sakme.ch/analyze/extraction", {
+    axios("https://api.aipcloud.io/analyze/extraction", {
         method: 'post',
         data: {
           sentiment: "0",
@@ -15,8 +15,8 @@ export function fetchKeywordExtraction(text) {
           text: text
         },
         auth: {
-          username: 'text@jdc.fr',
-          password: 'jdc'
+          username: 'test1@jdc.fr',
+          password: 'dfgdfg1.'
         }
 
       })

@@ -17,14 +17,14 @@ export function fetchCustomerAnalysis(text) {
       type: "FETCH_CUSTOMER_ANALYSIS"
     })
 
-    axios("https://aipcloud.sakme.ch/analyze/customer", {
+    axios("https://api.aipcloud.io/analyze/customer", {
         method: 'post',
         data: {
           text: text
         },
         auth: {
-          username: 'text@jdc.fr',
-          password: 'jdc'
+          username: 'test1@jdc.fr',
+          password: 'dfgdfg1.'
         }
 
       })

@@ -15,15 +15,15 @@ export function fetchTextSentiment(text) {
       type: "FETCH_TEXT_SENTIMENT"
     })
 
-    axios("https://aipcloud.sakme.ch/analyze/" + textType, {
+    axios("https://api.aipcloud.io/analyze/" + textType, {
         method: 'post',
         data: {
           text: text,
           sentence: text
         },
         auth: {
-          username: 'text@jdc.fr',
-          password: 'jdc'
+          username: 'test1@jdc.fr',
+          password: 'dfgdfg1.'
         }
 
       })
