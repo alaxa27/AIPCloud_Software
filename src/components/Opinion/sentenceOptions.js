@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import classnames from 'classnames'
-import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
 

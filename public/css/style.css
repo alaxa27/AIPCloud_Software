@@ -8957,3 +8957,9 @@ hr.transparent {
 .options {
   height: 140px;
   overflow-y: scroll; }
+
+.border-right {
+  border-right: 1px solid rgba(0, 0, 0, 0.1); }
+
+.align-button {
+  margin-left: 25px; }

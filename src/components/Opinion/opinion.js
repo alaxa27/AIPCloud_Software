@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Collapse, Nav, NavItem, NavLink, Row, Col, Button, Input } from 'reactstrap';
-import classnames from 'classnames'
+import { Collapse, Row, Col, Button, Input } from 'reactstrap';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 

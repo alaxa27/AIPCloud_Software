@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {WordCloud, Sidebar} from './wordcloud';
+import {WordCloud} from './wordcloud';
 
 const mapStateToProps = function(state) {
   return {
@@ -30,7 +30,7 @@ class KeywordExtractionResults extends Component {
       topics: this.props.extract, // Immutable.List
       title: 'Word Cloud',
       width: 800, // Overall widget dims
-      height: 300,
+      height: 260,
       fontName: 'Open Sans',
       fontSizes: [12, 16, 20, 24, 30, 40], // font categories
       random: false, // If false, places topmost topic to the center, otherwise - random position within chart area bounds

@@ -109,7 +109,7 @@ class SentimentAnalysisResults extends Component {
               </div>
             </div>
             <div className="col-md-3">
-              {this.props.textSentiment.relevance == "NaN"? null :
+              {this.props.textSentiment.relevance === "NaN"? null :
                 <div className="callout callout-success">
                   <div className="row">
                     <div className="col">

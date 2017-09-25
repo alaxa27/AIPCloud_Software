@@ -1,7 +1,5 @@
-import {Doughnut} from 'react-chartjs-2';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Radar, Chart } from 'react-chartjs-2';
 import { Progress } from 'reactstrap';
 
 
@@ -14,31 +12,8 @@ const mapStateToProps = function(state) {
 
 
 class CustomerAnalysisResults extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
-    const radar = {
-      labels: ['satisfaction', 'Aggressivité', 'Remboursement'],
-      datasets: [
-        {
-          data: [this.props.analysis.sentiment, this.props.analysis.agressivity, this.props.analysis.refund]
-        }
-      ]
-    };
-
-    const options = {
-      responsive: true,
-      barStrokeWidth: 1,
-      scale:{
-        ticks:{
-          min:0,
-          max:100
-        }
-      }
-    };
-
     return (
       <ul className="horizontal-bars type-2">
         <li>

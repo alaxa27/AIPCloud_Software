@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export function fetchKeywordExtraction(text) {
+export function fetchKeywordExtraction(text, volume) {
   return function(dispatch) {
 
     dispatch({
@@ -11,7 +11,7 @@ export function fetchKeywordExtraction(text) {
         method: 'post',
         data: {
           sentiment: "0",
-          volume: "0.7",
+          volume: volume,
           text: text
         },
         auth: {

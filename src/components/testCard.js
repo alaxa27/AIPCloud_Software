@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Collapse, Nav, NavItem, NavLink, Row, Col, Button} from 'reactstrap';
-import classnames from 'classnames'
-import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
-
-import Opinion from './Opinion/opinion.js'
 
 class TestCard extends Component {
   constructor(props) {
@@ -16,7 +10,11 @@ class TestCard extends Component {
 
   render() {
     return (
-      <Opinion />
+      <div>
+        <a href="#/text">Texte</a>
+        <br />
+        <a href="#/opinion">Opinion</a>
+      </div>
     );
   }
 }
