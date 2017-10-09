@@ -142,9 +142,6 @@ class Opinion extends Component {
                   <hr className="mt-0"/>
                   <Row>
                     <Col>
-                      <CustomerAnalysisResults />
-                    </Col>
-                    <Col>
                       <IntentAnalysisResults />
                     </Col>
                   </Row>

@@ -21,7 +21,10 @@ class CustomerAnalysisResults extends Component {
           <span className="title">Satisfaction</span>
           <span className="value">{this.props.analysis.satisfaction}%</span>
           <div className="bars">
-            <Progress className="progress-sm" color="info" value={this.props.analysis.satisfaction}/>
+            <Progress multi className="progress-sm">
+              <Progress bar color="lightest" value={(this.props.analysis.satisfaction > 0 ? 50 : (this.props.analysis.satisfaction * 0.5) + 50)}/>
+              <Progress bar color="info" value={Math.abs(this.props.analysis.satisfaction)/2}/>
+            </Progress>
           </div>
         </li>
         <li>

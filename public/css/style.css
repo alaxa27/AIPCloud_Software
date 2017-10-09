@@ -3972,6 +3972,12 @@ a.bg-inverse:focus, a.bg-inverse:hover {
 a.bg-muted:focus, a.bg-muted:hover {
   background-color: #93a6af !important; }
 
+.bg-lightest {
+  background-color: #eceff1 !important; }
+
+a.bg-lightest:focus, a.bg-lightest:hover {
+  background-color: #cfd6db !important; }
+
 .border-0 {
   border: 0 !important; }
 
@@ -8755,6 +8761,7 @@ hr.transparent {
 .bg-info,
 .bg-warning,
 .bg-danger,
+.bg-lightest,
 .bg-inverse {
   color: #fff; }
 

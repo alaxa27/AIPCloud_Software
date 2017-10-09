@@ -5,7 +5,7 @@ export function fetchTextSentiment(text) {
   // Let's say GET_TEXT_SENTIMENT_FULFILLED...
   return function(dispatch) {
     let textType;
-    if (text.split(/[;!?.]+/g).length > 1) {
+    if (text.split(/[;!?.]+/g).length > 2 && text.length > 40) {
       textType = "text";
     } else {
       textType = "sentence";

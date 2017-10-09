@@ -19,3 +19,5 @@
 @include bg-variant('.bg-inverse', $brand-inverse);
 
 @include bg-variant('.bg-muted', $brand-muted);
+
+@include bg-variant('.bg-lightest', $brand-lightest);
