@@ -141,15 +141,15 @@ export default class Cloud extends Component {
   }
 }
 
-Cloud.propTypes = {
-  fontName: PropTypes.string.isRequired,
-  fontSizes: PropTypes.array.isRequired,
-  height: PropTypes.number.isRequired,
-  onSelectTopic: PropTypes.func.isRequired,
-  selectedTopic: PropTypes.object,
-  topics: PropTypes.array.isRequired,
-  width: PropTypes.number.isRequired,
-};
+// Cloud.propTypes = {
+//   fontName: PropTypes.string.isRequired,
+//   fontSizes: PropTypes.array.isRequired,
+//   height: PropTypes.number.isRequired,
+//   onSelectTopic: PropTypes.func.isRequired,
+//   selectedTopic: PropTypes.object,
+//   topics: PropTypes.array.isRequired,
+//   width: PropTypes.number.isRequired,
+// };
 
 Cloud.defaultProps = {
   selectedTopic: null,

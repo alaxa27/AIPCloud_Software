@@ -58,9 +58,9 @@ const Sidebar = (props) => {
   );
 };
 
-Sidebar.propTypes = {
-  topic: PropTypes.object,
-};
+// // sidebar.proptypes = {
+//   topic: PropTypes.object,
+// };
 
 Sidebar.defaultProps = {
   topic: null,

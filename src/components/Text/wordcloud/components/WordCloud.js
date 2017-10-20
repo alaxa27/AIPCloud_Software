@@ -85,13 +85,13 @@ export default class WordCloud extends Component {
   }
 }
 
-WordCloud.propTypes = {
-  fontName: PropTypes.string,
-  fontSizes: PropTypes.array,
-  height: PropTypes.number,
-  topics: PropTypes.array,
-  width: PropTypes.number,
-};
+// WordCloud.propTypes = {
+//   fontName: PropTypes.string,
+//   fontSizes: PropTypes.array,
+//   height: PropTypes.number,
+//   topics: PropTypes.array,
+//   width: PropTypes.number,
+// };
 
 WordCloud.defaultProps = {
   fontName: 'Sans-Serif',
