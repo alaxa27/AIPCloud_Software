@@ -4,8 +4,7 @@ import {createBrowserHistory} from 'history';
 import TestCard from './testCard'
 import Text from './Text/text'
 import Opinion from './Opinion/opinion'
-import Entries from './cs'
-// import EmailsAnalysis from './emails/emailsAnalysis'
+import { Entries, AddEntry } from './cs'
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +22,6 @@ class App extends Component {
   }
 
 
-  // <Route path="/emails" name="Emails" component={EmailsAnalysis}/>
   render() {
     const history = createBrowserHistory();
 
@@ -34,7 +32,7 @@ class App extends Component {
           <Route path="/text" name="Texte" component={Text} />
           <Route path="/opinion" name="Opinion" component={Opinion} />
           <Route path="/cs/entries" name="Entries" component={Entries} />
-          <Redirect from="/cs" to="/cs/entries" />
+          <Route path="/cs/add/entry" name="AddEntry" component={AddEntry} />
           <Redirect from="/" to="/test" />
         </Switch>
       </Router>
