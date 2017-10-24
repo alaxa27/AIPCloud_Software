@@ -10,7 +10,7 @@ function (text) {
     textType = "sentence";
   }
 
-  (0, _axios2.default)("https://api.aipcloud.io/analyze/" + textType, {
+  return (0, _axios2.default)("https://api.aipcloud.io/analyze/" + textType, {
     method: 'post',
     data: {
       text: text,
@@ -18,14 +18,8 @@ function (text) {
 
     auth: {
       username: 'test1@jdc.fr',
-      password: 'dfgdfg1.' } }).
+      password: 'dfgdfg1.' } });
 
 
 
-  then(function (res) {
-    console.log("Response", res);
-  }).
-  catch(function (err) {
-    console.log(err);
-  });
 };

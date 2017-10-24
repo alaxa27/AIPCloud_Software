@@ -10,7 +10,7 @@ export default (text) => {
     textType = "sentence";
   }
 
-  axios("https://api.aipcloud.io/analyze/" + textType, {
+  return axios("https://api.aipcloud.io/analyze/" + textType, {
       method: 'post',
       data: {
         text: text,
@@ -21,11 +21,5 @@ export default (text) => {
         password: 'dfgdfg1.'
       }
 
-    })
-    .then((res) => {
-      console.log("Response", res);
-    })
-    .catch((err) => {
-      console.log(err);
     })
 }

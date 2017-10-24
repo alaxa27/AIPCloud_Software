@@ -7,6 +7,7 @@ import fs from 'fs'
 import FormData from 'form-data'
 
 import fetchTextSentiment from './text_sentiment'
+import fetchSoundEmotion from './sound_emotion'
 // import { bucket } from "@google-cloud/storage"
 
 const app = admin.initializeApp(functions.config().firebase);
@@ -23,6 +24,9 @@ export let analyseNewEntry = functions.firestore
     switch (entry.type) {
       case 'conversation':
         {
+          //Array of promises (needed to do multiple modification to firestore)
+          let promises = [];
+
           const filePath = '/entries/conversations/' + entry.file
           const tempFilePath = path.join(os.tmpdir(), entry.file);
 
@@ -30,35 +34,66 @@ export let analyseNewEntry = functions.firestore
             destination: tempFilePath
           })
           .then(() => {
-            //Call analysis
-            const formData = new FormData();
-            formData.append('file', fs.createReadStream(tempFilePath), entry.file)
-            axios.post('https://api.aipcloud.io/analyze/sound/emotion',
-                formData, {
-                  headers: formData.getHeaders(),
-                  auth: {
-                    username: 'test1@jdc.fr',
-                    password: 'dfgdfg1.'
-                  }
-                })
+            promises.push(fetchSoundEmotion(tempFilePath, entry.file)
               .then(res => {
-                //Save analysis result
-                // We'll only update if the name has changed.
-                // This is crucial to prevent infinite loops.
-                console.log(entryRef);
-                if (entry.analyzed) return;
-
-                // const soundAnalysisRef = entryRef.collection('analysis').doc('sound')
-                return entryRef.update({
-                  analyzed: true,
-                  analysis: res.data
+                const data = res.data
+                //Save data
+                // return entryRef.update({
+                //   analyzed: true,
+                //   analysis: {
+                //     sound: {
+                //       emotion: res.data
+                //     }
+                //   }
+                // })
+                return entryRef.set({
+                  analysis: {
+                    sound: {
+                      emotion: res.data
+                    }
+                  }
+                }, {
+                  merge: true
                 })
-                // return soundAnalysisRef.set(res)
 
-              })
+                //Get promise and return promise
 
+              }))
+            promises.push(fetchTextSentiment("Je suis super content!")
+              .then(res => {
+                const data = res.data
+                //Save data
+                return entryRef.set({
+                  analyzed: true,
+                  analysis: {
+                    text: {
+                      sentiment: res.data
+                    }
+                  }
+                }, {
+                  merge: true
+                })
+                return entryRef.update(analysis.text.sentiment = res.data, firestore.createIfMissingOption(true))
+                //Get promise and return promise
+
+              }))
+            // return soundAnalysisRef.set(res)
+            return Promise.all(promises)
           })
         }
     }
-    // perform desired operations ...
   });
+//   .then(res => {
+//     //Save analysis result
+//     // We'll only update if the name has changed.
+//     // This is crucial to prevent infinite loops.
+//     console.log(entryRef);
+//     if (entry.analyzed) return;
+//
+//     // const soundAnalysisRef = entryRef.collection('analysis').doc('sound')
+//   })
+//   .then(res => {
+//
+//   })
+// }
+// perform desired operations ...
