@@ -34,7 +34,9 @@ export function fetchEntries() {
 export function createEntry(data) {
   return dispatch => {
     const storageRef = firebase.storage().ref();
-    const ref = 'entries/conversations/' + guid() + '.' + data.file.name.split('.').pop();
+    const Guid = guid()
+    const fileName = Guid + '.' + data.file.name.split('.').pop();
+    const ref = 'entries/conversations/' + fileName;
     const uploadTask = storageRef.child(ref).put(data.file);
     dispatch({
       type: UPLOAD_STATE_CHANGED,
@@ -63,7 +65,6 @@ export function createEntry(data) {
         })
       },
       () => {
-        console.log("URL: ", uploadTask.snapshot.downloadURL);
         db.collection("entries").add({
           customer: {
             first_name: data.customerFirstName,
@@ -74,7 +75,7 @@ export function createEntry(data) {
             last_name: data.salesLastName
           },
           type: data.type,
-          file: ref,
+          file: fileName,
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).then(() => {
           dispatch({

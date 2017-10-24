@@ -2,8 +2,17 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
-    "firebase-admin": "~5.4.0",
-    "firebase-functions": "^0.7.0"
+    "@google-cloud/storage": "^1.4.0",
+    "axios": "^0.17.0",
+    "ffmpeg-static": "^2.0.0",
+    "firebase-admin": "^5.4.2",
+    "firebase-functions": "^0.7.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "form-data": "^2.3.1"
+  },
+  "scripts": {
+    "prepare": "babel ./*.es6 --presets es2015 --retain-lines -d ./",
+    "serve": "(babel ./*.es6 --presets es2015 --retain-lines -d ./ --watch&) && cd ../ && firebase serve --only functions"
   },
   "private": true
 }

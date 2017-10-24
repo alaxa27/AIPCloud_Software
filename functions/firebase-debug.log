@@ -1,0 +1,64 @@
+[debug] [2017-10-23T11:18:04.568Z] ----------------------------------------------------------------------
+[debug] [2017-10-23T11:18:04.573Z] Command:       /usr/bin/node /usr/bin/firebase serve --only functions
+[debug] [2017-10-23T11:18:04.574Z] CLI Version:   3.13.1
+[debug] [2017-10-23T11:18:04.574Z] Platform:      linux
+[debug] [2017-10-23T11:18:04.574Z] Node Version:  v6.11.3
+[debug] [2017-10-23T11:18:04.574Z] Time:          Mon Oct 23 2017 13:18:04 GMT+0200 (CEST)
+[debug] [2017-10-23T11:18:04.574Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-23T11:18:04.591Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-23T11:18:04.591Z] > authorizing via signed-in user
+[debug] [2017-10-23T11:18:04.594Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/aipsoft-ce792  
+ Mon Oct 23 2017 13:18:04 GMT+0200 (CEST)
+[debug] [2017-10-23T11:18:05.596Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-23T11:18:05.598Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/aipsoft-ce792/tokens  
+ Mon Oct 23 2017 13:18:05 GMT+0200 (CEST)
+[debug] [2017-10-23T11:18:06.328Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/alaxa/Projects/AIPCloud_Software'...
+[info] 
+[debug] [2017-10-23T11:18:10.264Z] Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/logs'
+    at Error (native)
+    at Object.fs.mkdirSync (fs.js:924:18)
+    at Object.assertLogsPath (/usr/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/src/emulator/logs.js:65:10)
+    at new Controller (/usr/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/src/cli/controller.js:85:32)
+    at FunctionsEmulator.start (/usr/lib/node_modules/firebase-tools/lib/functionsEmulator.js:111:21)
+    at Object.start (/usr/lib/node_modules/firebase-tools/lib/serve/functions.js:9:29)
+    at /usr/lib/node_modules/firebase-tools/lib/serve/index.js:16:19
+    at arrayMap (/usr/lib/node_modules/firebase-tools/node_modules/lodash/lodash.js:660:23)
+    at Function.map (/usr/lib/node_modules/firebase-tools/node_modules/lodash/lodash.js:9571:14)
+    at _serve (/usr/lib/node_modules/firebase-tools/lib/serve/index.js:14:21)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2017-10-23T11:19:30.538Z] ----------------------------------------------------------------------
+[debug] [2017-10-23T11:19:30.542Z] Command:       /usr/bin/node /usr/bin/firebase serve --only functions
+[debug] [2017-10-23T11:19:30.543Z] CLI Version:   3.13.1
+[debug] [2017-10-23T11:19:30.543Z] Platform:      linux
+[debug] [2017-10-23T11:19:30.543Z] Node Version:  v6.11.3
+[debug] [2017-10-23T11:19:30.543Z] Time:          Mon Oct 23 2017 13:19:30 GMT+0200 (CEST)
+[debug] [2017-10-23T11:19:30.543Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-23T11:19:30.558Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-23T11:19:30.558Z] > authorizing via signed-in user
+[debug] [2017-10-23T11:19:30.561Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/aipsoft-ce792  
+ Mon Oct 23 2017 13:19:30 GMT+0200 (CEST)
+[debug] [2017-10-23T11:19:31.595Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-23T11:19:31.596Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/aipsoft-ce792/tokens  
+ Mon Oct 23 2017 13:19:31 GMT+0200 (CEST)
+[debug] [2017-10-23T11:19:32.398Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/alaxa/Projects/AIPCloud_Software'...
+[info] 
+[debug] [2017-10-23T11:19:33.223Z] Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/logs'
+    at Error (native)
+    at Object.fs.mkdirSync (fs.js:924:18)
+    at Object.assertLogsPath (/usr/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/src/emulator/logs.js:65:10)
+    at new Controller (/usr/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/src/cli/controller.js:85:32)
+    at FunctionsEmulator.start (/usr/lib/node_modules/firebase-tools/lib/functionsEmulator.js:111:21)
+    at Object.start (/usr/lib/node_modules/firebase-tools/lib/serve/functions.js:9:29)
+    at /usr/lib/node_modules/firebase-tools/lib/serve/index.js:16:19
+    at arrayMap (/usr/lib/node_modules/firebase-tools/node_modules/lodash/lodash.js:660:23)
+    at Function.map (/usr/lib/node_modules/firebase-tools/node_modules/lodash/lodash.js:9571:14)
+    at _serve (/usr/lib/node_modules/firebase-tools/lib/serve/index.js:14:21)
+[error] 
+[error] Error: An unexpected error has occurred.
