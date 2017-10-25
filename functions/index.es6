@@ -5,9 +5,11 @@ import path from 'path'
 import os from 'os'
 import fs from 'fs'
 import FormData from 'form-data'
+import Promise from 'bluebird'
 
 import fetchTextSentiment from './text_sentiment'
 import fetchSoundEmotion from './sound_emotion'
+import fetchSpeech2text from './speech_2_text'
 // import { bucket } from "@google-cloud/storage"
 
 const app = admin.initializeApp(functions.config().firebase);
@@ -24,62 +26,66 @@ export let analyseNewEntry = functions.firestore
     switch (entry.type) {
       case 'conversation':
         {
-          //Array of promises (needed to do multiple modification to firestore)
-          let promises = [];
 
           const filePath = '/entries/conversations/' + entry.file
           const tempFilePath = path.join(os.tmpdir(), entry.file);
 
-          bucket.file(filePath).download({
-            destination: tempFilePath
-          })
-          .then(() => {
-            promises.push(fetchSoundEmotion(tempFilePath, entry.file)
-              .then(res => {
-                const data = res.data
-                //Save data
-                // return entryRef.update({
-                //   analyzed: true,
-                //   analysis: {
-                //     sound: {
-                //       emotion: res.data
-                //     }
-                //   }
-                // })
-                return entryRef.set({
-                  analysis: {
-                    sound: {
-                      emotion: res.data
+          return bucket.file(filePath).download({
+              destination: tempFilePath
+            })
+            .then(() => {
+              //Array of promises (needed to do multiple modification to firestore)
+              let promises = [];
+
+              promises.push(fetchSoundEmotion(tempFilePath, entry.file)
+                .then(res => {
+                  const data = res.data
+                  return entryRef.set({
+                    analyzed: true,
+                    analysis: {
+                      sound: {
+                        emotion: data
+                      }
                     }
+                  }, {
+                    merge: true
+                  })
+
+                  //Get promise and return promise
+
+                }))
+
+              promises.push(fetchSpeech2text(tempFilePath, entry.file)
+                .then(res => {
+                  const results = res.data.results;
+                  let proms = [];
+                  for (var i = 0; i < results.length; i++) {
+                    proms.push(fetchTextSentiment(results[i].transcript))
                   }
-                }, {
-                  merge: true
+                  proms.push(results)
+                  return Promise.all(proms)
                 })
-
-                //Get promise and return promise
-
-              }))
-            promises.push(fetchTextSentiment("Je suis super content!")
-              .then(res => {
-                const data = res.data
-                //Save data
-                return entryRef.set({
-                  analyzed: true,
-                  analysis: {
-                    text: {
-                      sentiment: res.data
+                .then(promsData => {
+                  let results = promsData[promsData.length - 1]
+                  for (var i = 0; i < results.length; i++) {
+                    results[i].sentiment = promsData[i].data
+                  }
+                  return entryRef.set({
+                    analyzed: true,
+                    analysis: {
+                      sound: {
+                        speech_2_text: results
+                      }
                     }
-                  }
-                }, {
-                  merge: true
-                })
-                return entryRef.update(analysis.text.sentiment = res.data, firestore.createIfMissingOption(true))
-                //Get promise and return promise
-
-              }))
-            // return soundAnalysisRef.set(res)
-            return Promise.all(promises)
-          })
+                  }, {
+                    merge: true
+                  })
+                }))
+              //for res in results
+              //for each transcript fetchTextSentiment
+              //save result as res.sentiment = data
+              return Promise.all(promises)
+            })
         }
     }
   });

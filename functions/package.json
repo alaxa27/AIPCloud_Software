@@ -4,6 +4,7 @@
   "dependencies": {
     "@google-cloud/storage": "^1.4.0",
     "axios": "^0.17.0",
+    "bluebird": "^3.5.1",
     "ffmpeg-static": "^2.0.0",
     "firebase-admin": "^5.4.2",
     "firebase-functions": "^0.7.1",

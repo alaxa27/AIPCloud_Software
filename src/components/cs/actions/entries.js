@@ -1,4 +1,6 @@
 import {
+  FETCH_ENTRY,
+  FETCH_ENTRY_FULFILLED,
   FETCH_ENTRIES,
   FETCH_ENTRIES_FULFILLED,
   DELETE_ENTRY,
@@ -29,6 +31,19 @@ export function fetchEntries() {
     })
 
   };
+}
+
+export function fetchEntry(id) {
+  return dispatch => {
+    db.collection("entries").doc(id).get().then(snap => {
+      let payload = snap.data()
+      payload.id = snap.id
+      dispatch({
+        type: FETCH_ENTRY_FULFILLED,
+        payload: payload
+      })
+    })
+  }
 }
 
 export function createEntry(data) {
