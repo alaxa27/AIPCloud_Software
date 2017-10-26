@@ -19,11 +19,9 @@ export function fetchEntries() {
     db.collection("entries").get().then((snapshot) => {
       let payload = []
       snapshot.forEach((doc) => {
-        console.log(doc.data());
         payload.push(doc.data())
         payload[payload.length - 1].id = doc.id
       })
-      console.log(payload);
       dispatch({
         type: FETCH_ENTRIES_FULFILLED,
         payload: payload

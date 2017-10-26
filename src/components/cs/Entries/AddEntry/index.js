@@ -19,6 +19,12 @@ import {
   Input,
   FormText
 } from 'reactstrap';
+import fs from 'fs'
+import FormData from 'form-data'
+import path from 'path'
+
+
+
 import ConversationForm from './conversation'
 
 import * as actions from '../../actions/entries';
@@ -36,6 +42,9 @@ class AddEntry extends Component {
     this.handleCustomerFirstName = this.handleCustomerFirstName.bind(this)
     this.handleCustomerLastName = this.handleCustomerLastName.bind(this)
     this.onSelectChange = this.onSelectChange.bind(this)
+  }
+
+  componentWillMount() {
   }
 
   sendValue(state) {
@@ -82,7 +91,7 @@ class AddEntry extends Component {
                 <Form>
                   <CardBlock>
                     <FormGroup>
-                      <Label plaintext tag="h4">Customer Information</Label>
+                      <Label tag="h4">Customer Information</Label>
                     </FormGroup>
                     <FormGroup row>
                       <Label for="customerFirstName" sm={2}>FirstName(s)</Label>

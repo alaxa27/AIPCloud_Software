@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
-import { Table } from 'reactstrap';
+import { Table, Input } from 'reactstrap';
+
 
 
 class EntriesTable extends Component {
@@ -9,15 +10,22 @@ class EntriesTable extends Component {
     this.state = {};
   }
 
+  handleCheck() {
+    console.log("ee ");
+  }
+
   renderEntries() {
     return this.props.entries.map((entry, key) => {
+      entry.checked = false;
       return (
-        <tr key={entry.id}>
-          <th scope="row">{entry.id}</th>
-          <td>{entry.type}</td>
-          <td>{entry.customer.first_name + ' ' + entry.customer.last_name}</td>
-          <td>{(entry.timestamp ? entry.timestamp.toString() : null)}</td>
-        </tr>
+          <tr key={entry.id}>
+            <th scope="row">{entry.id}</th>
+            <td>{entry.type}</td>
+            <td>{entry.customer.first_name + ' ' + entry.customer.last_name}</td>
+            <td>{entry.sales.first_name + ' ' + entry.sales.last_name}</td>
+            <td>{(entry.timestamp ? entry.timestamp.toString() : null)}</td>
+            <td><input type="checkbox" checked={entry.checked} onClick={this.handleCheck}/></td>
+          </tr>
       )
     })
   }
@@ -31,7 +39,9 @@ class EntriesTable extends Component {
               <th>ID</th>
               <th>Type</th>
               <th>Customer</th>
+              <th>Sales</th>
               <th>Timestamp</th>
+              <th><input type="checkbox" onClick={() => {console.log("fefefe")} }/></th>
             </tr>
           </thead>
           <tbody>

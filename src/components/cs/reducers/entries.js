@@ -5,6 +5,7 @@ import {
 } from '../actions/types';
 
 export default function(state = {
+  done : false,
   entries: [],
   entry: {
     customer: {
@@ -14,6 +15,11 @@ export default function(state = {
     sales: {
       first_name: "",
       last_name: ""
+    },
+    analysis: {
+      sound: {
+        speech_2_text: []
+      }
     }
   }
 }, action) {
@@ -24,7 +30,8 @@ export default function(state = {
       };
     case FETCH_ENTRY_FULFILLED:
       return { ...state,
-        entry: action.payload
+        entry: action.payload,
+        done: true
       };
   }
 
