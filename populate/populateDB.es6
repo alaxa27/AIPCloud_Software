@@ -1,21 +1,12 @@
-console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-import FormData from 'form-data'
+console.log("******************************");
+console.log("*Generating the population...*");
+console.log("******************************");
 import fs from 'fs'
 import path from 'path'
 
-import {
-  FETCH_ENTRY,
-  FETCH_ENTRY_FULFILLED,
-  FETCH_ENTRIES,
-  FETCH_ENTRIES_FULFILLED,
-  DELETE_ENTRY,
-  CREATE_ENTRY,
-  CREATE_ENTRY_FULFILLED,
-  CREATE_ENTRY_REJECTED,
-  UPLOAD_STATE_CHANGED
-} from './types';
 import guid from './guid'
 import firebase from 'firebase'
+
 var serviceAccount = require("./aipsoft-ce792-firebase-adminsdk-2i693-5743294beb.json");
 import * as admin from "firebase-admin"
 // var storage = require('@google-cloud/storage')();
@@ -47,7 +38,7 @@ function createEntry(data) {
   });
   localReadStream.pipe(remoteWriteStream)
   .on('finish', () => {
-    console.log("finish");
+    console.log("File uploaded.");
     db.collection("entries").add({
       customer: {
         first_name: data.customerFirstName,
@@ -61,22 +52,10 @@ function createEntry(data) {
       file: fileName,
       timestamp: data.timestamp
     })
+    .then((ref) => {
+      console.log("Document stored", ref.id);
+    })
   })
-
-  // bucket.upload(data.file_path, function(err, file) {
-  //   console.log("err", err);
-  // })
-
-
-  // files.createWriteStream({
-  //     metadata: {
-  //       contentType: 'audio/mp3'
-  //     }
-  //   })
-  //   .on("error", (err) => {
-  //     // console.error(err);
-  //   })
-  //   .end(fs.createReadStream('./data/0.mp3'))
 }
 
 
@@ -111,7 +90,6 @@ const names = [
 let timestamp = new Date();
 let customer = {};
 let sales = {};
-console.log("********************************************");
 for (var i = 0; i <= 17; i++) {
   let data = {};
   data.timestamp = new Date(Date.now() - 1e10 * Math.random())
@@ -124,6 +102,7 @@ for (var i = 0; i <= 17; i++) {
   data.file_path = path.join(__dirname, 'data', j + '.mp3');
   data.file_name = j + '.mp3'
   // console.log(data);
-  console.log(j);
+  console.log(data);
+  console.log("--------------------------")
   createEntry(data)
 }

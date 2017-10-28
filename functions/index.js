@@ -40,13 +40,8 @@ onCreate(function (event) {
           promises.push((0, _sound_emotion2.default)(tempFilePath, entry.file).
           then(function (res) {
             var data = res.data;
-            return entryRef.set({
-              analyzed: true,
-              analysis: {
-                sound: {
-                  emotion: data } } },
-
-
+            return entryRef.collection("analysis").doc("emotion").set({
+              results: [data] },
             {
               merge: true });
 
@@ -70,13 +65,8 @@ onCreate(function (event) {
             for (var i = 0; i < results.length; i++) {
               results[i].sentiment = promsData[i].data;
             }
-            return entryRef.set({
-              analyzed: true,
-              analysis: {
-                sound: {
-                  speech_2_text: results } } },
-
-
+            return entryRef.collection("analysis").doc("speech_2_text").set({
+              results: results },
             {
               merge: true });
 

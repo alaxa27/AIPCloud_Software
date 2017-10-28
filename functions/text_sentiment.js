@@ -4,7 +4,7 @@ function (text) {
   //Need AJAX Here. If it works I think I need to dispatch another action.
   // Let's say GET_TEXT_SENTIMENT_FULFILLED...
   var textType = void 0;
-  if (text.split(/[;!?.]+/g).length > 2 && text.length > 40) {
+  if (text.split(/[;!?.]+/g).length > 2 && text.length > 66) {
     textType = "text";
   } else {
     textType = "sentence";

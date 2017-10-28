@@ -1,23 +1,14 @@
-'use strict';
-var _formData = require('form-data');var _formData2 = _interopRequireDefault(_formData);
-var _fs = require('fs');var _fs2 = _interopRequireDefault(_fs);
-var _path = require('path');var _path2 = _interopRequireDefault(_path);
-
-var _types = require('./types');
+"use strict";
 
 
+var _fs = require("fs");var _fs2 = _interopRequireDefault(_fs);
+var _path = require("path");var _path2 = _interopRequireDefault(_path);
+
+var _guid = require("./guid");var _guid2 = _interopRequireDefault(_guid);
+var _firebase = require("firebase");var _firebase2 = _interopRequireDefault(_firebase);
 
 
-
-
-
-
-
-
-var _guid = require('./guid');var _guid2 = _interopRequireDefault(_guid);
-var _firebase = require('firebase');var _firebase2 = _interopRequireDefault(_firebase);
-
-var _firebaseAdmin = require('firebase-admin');var admin = _interopRequireWildcard(_firebaseAdmin);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");var serviceAccount = require("./aipsoft-ce792-firebase-adminsdk-2i693-5743294beb.json");
+var _firebaseAdmin = require("firebase-admin");var admin = _interopRequireWildcard(_firebaseAdmin);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}console.log("******************************");console.log("*Generating the population...*");console.log("******************************");var serviceAccount = require("./aipsoft-ce792-firebase-adminsdk-2i693-5743294beb.json");
 // var storage = require('@google-cloud/storage')();
 
 var gcloud = require('gcloud')({
@@ -47,7 +38,7 @@ function createEntry(data) {
 
   localReadStream.pipe(remoteWriteStream).
   on('finish', function () {
-    console.log("finish");
+    console.log("File uploaded.");
     db.collection("entries").add({
       customer: {
         first_name: data.customerFirstName,
@@ -59,24 +50,12 @@ function createEntry(data) {
 
       type: data.type,
       file: fileName,
-      timestamp: data.timestamp });
+      timestamp: data.timestamp }).
 
+    then(function (ref) {
+      console.log("Document stored", ref.id);
+    });
   });
-
-  // bucket.upload(data.file_path, function(err, file) {
-  //   console.log("err", err);
-  // })
-
-
-  // files.createWriteStream({
-  //     metadata: {
-  //       contentType: 'audio/mp3'
-  //     }
-  //   })
-  //   .on("error", (err) => {
-  //     // console.error(err);
-  //   })
-  //   .end(fs.createReadStream('./data/0.mp3'))
 }
 
 
@@ -111,7 +90,6 @@ var names = [
 var timestamp = new Date();
 var customer = {};
 var sales = {};
-console.log("********************************************");
 for (var i = 0; i <= 17; i++) {
   var data = {};
   data.timestamp = new Date(Date.now() - 1e10 * Math.random());
@@ -124,6 +102,7 @@ for (var i = 0; i <= 17; i++) {
   data.file_path = _path2.default.join(__dirname, 'data', j + '.mp3');
   data.file_name = j + '.mp3';
   // console.log(data);
-  console.log(j);
+  console.log(data);
+  console.log("--------------------------");
   createEntry(data);
 }

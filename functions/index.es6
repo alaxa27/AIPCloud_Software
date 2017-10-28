@@ -40,13 +40,8 @@ export let analyseNewEntry = functions.firestore
               promises.push(fetchSoundEmotion(tempFilePath, entry.file)
                 .then(res => {
                   const data = res.data
-                  return entryRef.set({
-                    analyzed: true,
-                    analysis: {
-                      sound: {
-                        emotion: data
-                      }
-                    }
+                  return entryRef.collection("analysis").doc("emotion").set({
+                    results: [data]
                   }, {
                     merge: true
                   })
@@ -70,13 +65,8 @@ export let analyseNewEntry = functions.firestore
                   for (var i = 0; i < results.length; i++) {
                     results[i].sentiment = promsData[i].data
                   }
-                  return entryRef.set({
-                    analyzed: true,
-                    analysis: {
-                      sound: {
-                        speech_2_text: results
-                      }
-                    }
+                  return entryRef.collection("analysis").doc("speech_2_text").set({
+                    results: results
                   }, {
                     merge: true
                   })

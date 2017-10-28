@@ -10,6 +10,8 @@ import {
   Table
 } from 'reactstrap';
 
+import Header from './header';
+import Stats from './stats';
 import EntriesTable from './entriesTable';
 
 import * as actions from '../actions/entries';
@@ -25,21 +27,23 @@ class Entries extends Component {
   }
 
   render() {
+    const values = this.props.entries.map((e, key) => {
+      return e.timestamp.getTime();
+    })
     return (
-      <div className="app">
+      <div className="app header-fixed">
+        <Header/>
         <div className="app-body">
           <main className="main">
-            <div className="animated fadeIn container-fluid">
-              <Card className="card-block">
-                <CardTitle>Entries</CardTitle>
-                <Row>
-                  <Col>
-                    <EntriesTable entries={this.props.entries}/>
-                  </Col>
-                </Row>
-              </Card>
+            <div className="container-fluid">
+              <div className="animated fadeIn">
+                <div>
+
+                </div>
+                <Stats values={values}/>
+                <EntriesTable entries={this.props.entries}/>
+              </div>
             </div>
-            {this.props.children}
           </main>
         </div>
         <div className="footer-fixed">

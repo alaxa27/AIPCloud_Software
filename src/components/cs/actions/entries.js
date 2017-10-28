@@ -33,14 +33,21 @@ export function fetchEntries() {
 
 export function fetchEntry(id) {
   return dispatch => {
-    db.collection("entries").doc(id).get().then(snap => {
-      let payload = snap.data()
-      payload.id = snap.id
-      dispatch({
-        type: FETCH_ENTRY_FULFILLED,
-        payload: payload
+    db.collection("entries").doc(id).get()
+      .then(snap => {
+        let payload = snap.data()
+        payload.id = snap.id
+        payload.analysis = {}
+        snap.ref.collection("analysis").get().then((snapshot) => {
+          snapshot.forEach(an => {
+            payload.analysis[an.id] = an.data()
+          })
+          dispatch({
+            type: FETCH_ENTRY_FULFILLED,
+            payload: payload
+          })
+        })
       })
-    })
   }
 }
 
@@ -90,7 +97,7 @@ export function createEntry(data) {
           type: data.type,
           file: fileName,
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => {
+        }).then((entryRef) => {
           dispatch({
             type: CREATE_ENTRY_FULFILLED
           })
