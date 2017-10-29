@@ -89,8 +89,8 @@ var names = [
 //- 1e6 -> -1e10
 var timestamp = new Date();
 var customer = {};
-var sales = {};
-for (var i = 0; i <= 17; i++) {
+var sales = {};var _loop = function _loop() {
+
   var data = {};
   data.timestamp = new Date(Date.now() - 1e10 * Math.random());
   data.customerFirstName = names[Math.floor(Math.random() * names.length)];
@@ -104,5 +104,11 @@ for (var i = 0; i <= 17; i++) {
   // console.log(data);
   console.log(data);
   console.log("--------------------------");
-  createEntry(data);
+  if (Math.random() > 0.5) {
+    setTimeout(function () {
+      createEntry(data);
+    }, 60000);
+  } else {
+    createEntry(data);
+  }};for (var i = 0; i <= 17; i++) {_loop();
 }

@@ -1,4 +1,6 @@
 import {
+  CREATE_ENTRY,
+  CREATE_ENTRY_FULFILLED,
   FETCH_ENTRIES,
   FETCH_ENTRIES_FULFILLED,
   FETCH_ENTRY_FULFILLED
@@ -6,6 +8,7 @@ import {
 
 const entry = {
   loaded: false,
+  checked: null,
   customer: {
     first_name: "",
     last_name: ""
@@ -36,6 +39,7 @@ const entry = {
 
 
 export default function(state = {
+    add_modal: false,
     done: false,
     entries: [
       entry

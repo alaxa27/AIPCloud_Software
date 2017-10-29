@@ -7,9 +7,14 @@ import {
   CREATE_ENTRY,
   CREATE_ENTRY_FULFILLED,
   CREATE_ENTRY_REJECTED,
-  UPLOAD_STATE_CHANGED
+  UPLOAD_STATE_CHANGED,
+  FETCH_ANALYSIS,
+  FETCH_ANALYSIS_FULFILLED,
+  FETCH_ANALYSIS_REJECTED,
+  TOGGLE_ADD_MODAL
 } from './types';
 import guid from '../guid'
+import axios from 'axios'
 
 import firebase from 'firebase'
 import db from '../firebase-app'
@@ -99,17 +104,45 @@ export function createEntry(data) {
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).then((entryRef) => {
           dispatch({
-            type: CREATE_ENTRY_FULFILLED
-          })
-          dispatch({
             type: UPLOAD_STATE_CHANGED,
             payload: 100
           })
+          setTimeout(() => {
+            dispatch({
+              type: TOGGLE_ADD_MODAL
+            })
+          }, 1000)
         }).catch((err) => {
           dispatch({
             type: CREATE_ENTRY_REJECTED,
             payload: err
           })
+        })
+      })
+  }
+}
+
+export function analyzeEntry(id) {
+  return dispatch => {
+    dispatch({
+      type: FETCH_ANALYSIS
+    })
+    return axios('https://us-central1-aipsoft-ce792.cloudfunctions.net/analyseEntry', {
+        method: 'post',
+        data: {
+          id: id
+        }
+      })
+      .then(res => {
+        dispatch({
+          type: FETCH_ANALYSIS_FULFILLED,
+          payload: res.data
+        })
+      })
+      .catch(e => {
+        dispatch({
+          type: FETCH_ANALYSIS_REJECTED,
+          payload: e
         })
       })
   }

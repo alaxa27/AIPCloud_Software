@@ -17,13 +17,14 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText
+  FormText,
+  ModalBody,
+  ModalHeader,
+  ModalFooter
 } from 'reactstrap';
 import fs from 'fs'
 import FormData from 'form-data'
 import path from 'path'
-
-
 
 import ConversationForm from './conversation'
 
@@ -32,8 +33,7 @@ import * as actions from '../../actions/entries';
 class AddEntry extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
     //
     this.sendValue = this.sendValue.bind(this)
     //
@@ -44,8 +44,7 @@ class AddEntry extends Component {
     this.onSelectChange = this.onSelectChange.bind(this)
   }
 
-  componentWillMount() {
-  }
+  componentWillMount() {}
 
   sendValue(state) {
     this.setState(state)
@@ -81,74 +80,54 @@ class AddEntry extends Component {
 
   render() {
     return (
-      <div className="app">
-        <div className="app-header"></div>
-        <div className="app-body">
-          <main className="main">
-            <div className="animated fadeIn container-fluid">
-              <Card>
-                <CardHeader tag="h3">Add an entry</CardHeader>
-                <Form>
-                  <CardBlock>
-                    <FormGroup>
-                      <Label tag="h4">Customer Information</Label>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Label for="customerFirstName" sm={2}>FirstName(s)</Label>
-                      <Col sm={10}>
-                        <Input name="customerFirstName" id="customerFirstName" onChange={this.handleCustomerFirstName}/>
-                      </Col>
-                      <Label for="customerLastName" sm={2}>LastName</Label>
-                      <Col sm={10}>
-                        <Input name="customerLastName" id="customerLastName" onChange={this.handleCustomerLastName}/>
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Label for="typeSelect" sm={2} tag="h4">Type</Label>
-                      <Col sm={10}>
-                        <Input type="select" name="select" id="typeSelect" onChange={this.onSelectChange}>
-                          <option>
-                            -- select a type --
-                          </option>
-                          <option>
-                            conversation
-                          </option>
-                          <option>
-                            image
-                          </option>
-                          <option>
-                            comment
-                          </option>
-                        </Input>
-                      </Col>
-                    </FormGroup>
-                    {this.TypeForm}
-                  </CardBlock>
-                  <CardFooter>
-                    <Row>
-                      <Col>
-                        <Button color="success" onClick={this.onSubmit}>Push!</Button>
-                      </Col>
-                      <Col>
-                        {(this.props.progress === -1 ? null : <Progress color={(this.props.progress < 100 ? null : 'success')} value={this.props.progress}/>)}
-                      </Col>
-                    </Row>
-                  </CardFooter>
-                </Form>
-              </Card>
-            </div>
-          </main>
-        </div>
-      </div>
+      <Form>
+        <ModalHeader>
+          Add an entry
+        </ModalHeader>
+        <ModalBody>
+          <FormGroup>
+            <Label tag="h4">Customer Information</Label>
+          </FormGroup>
+          <FormGroup>
+            <Label for="customerFirstName" sm={2}>FirstName(s)</Label>
+            <Input name="customerFirstName" id="customerFirstName" onChange={this.handleCustomerFirstName}/>
+            <Label for="customerLastName" sm={2}>LastName</Label>
+            <Input name="customerLastName" id="customerLastName" onChange={this.handleCustomerLastName}/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="typeSelect" sm={2} tag="h4">Type</Label>
+            <Input type="select" name="select" id="typeSelect" onChange={this.onSelectChange}>
+              <option>
+                -- select a type --
+              </option>
+              <option>
+                conversation
+              </option>
+              <option>
+                image
+              </option>
+              <option>
+                comment
+              </option>
+            </Input>
+          </FormGroup>
+          {this.TypeForm}
+          {(this.props.progress === -1
+            ? null
+            : <Progress color={(this.props.progress < 100
+              ? null
+              : 'success')} value={this.props.progress}/>)}
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={this.onSubmit}>Push!</Button>
+        </ModalFooter>
+      </Form>
     );
   }
 }
 
-
 function mapStateToProps(state) {
-  return {
-    progress: state.cs.upload.progress
-  }
+  return {progress: state.cs.upload.progress}
 }
 
 export default connect(mapStateToProps, actions)(AddEntry);

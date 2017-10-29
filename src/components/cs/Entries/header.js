@@ -16,10 +16,10 @@ class Header extends Component {
             <a className="nav-link navbar-toggler sidebar-toggler" onClick={this.sidebarToggle} href="#">&#9776;</a>
           </li>
           <li className="nav-item px-3">
-            <a className="nav-link" href="/cs/entries">Entries</a>
+            <a className="nav-link" href="/">Home</a>
           </li>
           <li className="nav-item px-3">
-            <a className="nav-link" href="/cs/add/entry">Add</a>
+            <a className="nav-link" href="/cs/entries">Dashboard</a>
           </li>
           <li className="nav-item px-3">
             <a className="nav-link" href="#">Settings</a>

@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import {Radar} from 'react-chartjs-2'
 
+import Header from './header'
 import AudioPlayer from './audioPlayer'
 
 import * as actions from '../actions/entries';
@@ -28,6 +29,11 @@ class Entry extends Component {
   componentWillMount() {
     this.props.fetchEntry(this.props.match.params.id);
   }
+
+  analyzeEntry() {
+    this.props.analyzeEntry(this.props.match.params.id)
+  }
+
   renderTranscription() {
     try {
       return this.props.entry.analysis.speech_2_text.results.map((line, key) => {
@@ -46,8 +52,8 @@ class Entry extends Component {
           </tr>
         )
       })
-    } catch(e) {
-      return [<p>No analysis results yet.</p>]
+    } catch (e) {
+      return [ < p > No analysis results yet. < /p>]
     }
   }
 
@@ -106,60 +112,69 @@ class Entry extends Component {
     };
     return (
       <div className="app">
-        <div className="app-header"></div>
+        <Header />
         <div className="app-body">
           <main className="main">
-            <div className="animated fadeIn container-fluid">
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    Conversation
-                  </CardTitle>
-                </CardHeader>
-                <CardBlock>
-                  <Row>
-                    <Col>
-                      {this.props.entry.customer.first_name + ' ' + this.props.entry.customer.last_name}
-                    </Col>
-                    <Col>
-                      {this.props.entry.sales.first_name + ' ' + this.props.entry.sales.last_name}
-                    </Col>
-                  </Row>
-                  <Row>
-                    <AudioPlayer/>
-                  </Row>
-                </CardBlock>
-              </Card>
-              <Row>
-                <Col>
-                  <Card>
-                    <CardHeader tag="h5">Transcription</CardHeader>
-                    <CardBlock>
-                      <Table hover bordered>
-                        <tbody>
-                          {this.renderTranscription()}
-                        </tbody>
-                      </Table>
-                    </CardBlock>
-                  </Card>
-                </Col>
-                <Col>
-                  <Card>
-                    <CardHeader tag="h5">Emotion through time</CardHeader>
-                    <CardBlock>
-                      <div className="chart-wrapper">
-                        {(this.props.entry.loaded
-                          ? <Radar {...radar}/>
-                          : 'Loading...')}
-                      </div>
-                    </CardBlock>
-                  </Card>
-                </Col>
-              </Row>
+            <div className="container-fluid">
+              <div className="animated fadeIn">
+                <Card>
+                  <CardHeader>
+                    <Row>
+                      <Col>
+                        <CardTitle>
+                          Conversation
+                        </CardTitle>
+                      </Col>
+                      <Col>
+                        <Button color="primary" size="lg" className="float-right" onClick={this.analyzeEntry.bind(this)}>Analyze</Button>
+                      </Col>
+                    </Row>
+                  </CardHeader>
+                  <CardBlock>
+                    <Row>
+                      <Col>
+                        {this.props.entry.customer.first_name + ' ' + this.props.entry.customer.last_name}
+                      </Col>
+                      <Col>
+                        {this.props.entry.sales.first_name + ' ' + this.props.entry.sales.last_name}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <AudioPlayer/>
+                    </Row>
+                  </CardBlock>
+                </Card>
+                <Row>
+                  <Col>
+                    <Card>
+                      <CardHeader tag="h5">Transcription</CardHeader>
+                      <CardBlock>
+                        <Table hover bordered>
+                          <tbody>
+                            {this.renderTranscription()}
+                          </tbody>
+                        </Table>
+                      </CardBlock>
+                    </Card>
+                  </Col>
+                  <Col>
+                    <Card>
+                      <CardHeader tag="h5">Emotion through time</CardHeader>
+                      <CardBlock>
+                        <div className="chart-wrapper">
+                          {(this.props.entry.loaded
+                            ? <Radar {...radar}/>
+                            : 'Loading...')}
+                        </div>
+                      </CardBlock>
+                    </Card>
+                  </Col>
+                </Row>
+              </div>
             </div>
           </main>
-        </div >
       </div>
+    </div>
     );
   }
 }

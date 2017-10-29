@@ -22,19 +22,25 @@ class ConversationForm extends Component {
   }
 
   handleSalesFirstName(e) {
-    this.setState({salesFirstName: e.target.value}, () => {
+    this.setState({
+      salesFirstName: e.target.value
+    }, () => {
       this.props.sendValue(this.state)
     })
   }
 
   handleSalesLastName(e) {
-    this.setState({salesLastName: e.target.value}, () => {
+    this.setState({
+      salesLastName: e.target.value
+    }, () => {
       this.props.sendValue(this.state)
     })
   }
 
   handleFile(e) {
-    this.setState({file: e.target.files[0]}, () => {
+    this.setState({
+      file: e.target.files[0]
+    }, () => {
       this.props.sendValue(this.state)
     })
   }
@@ -45,24 +51,18 @@ class ConversationForm extends Component {
         <FormGroup>
           <Label plaintext tag="h4">Sales Information</Label>
         </FormGroup>
-        <FormGroup row>
+        <FormGroup>
           <Label for="salesFirstName" sm={2}>FirstName(s)</Label>
-          <Col sm={10}>
-            <Input name="salesFirstName" id="salesFirstName" onChange={this.handleSalesFirstName}/>
-          </Col>
+          <Input name="salesFirstName" id="salesFirstName" onChange={this.handleSalesFirstName}/>
           <Label for="salesLastName" sm={2}>LastName</Label>
-          <Col sm={10}>
-            <Input name="salesLastName" id="salesLastName" onChange={this.handleSalesLastName}/>
-          </Col>
+          <Input name="salesLastName" id="salesLastName" onChange={this.handleSalesLastName}/>
         </FormGroup>
-        <FormGroup row>
+        <FormGroup>
           <Label for="conversationFile" sm={2}>File</Label>
-          <Col sm={10}>
-            <Input type="file" name="file" id="conversationFile" onChange={this.handleFile}/>
-            <FormText color="muted">
-              Please make sure the file is in .wav format
-            </FormText>
-          </Col>
+          <Input type="file" name="file" id="conversationFile" onChange={this.handleFile}/>
+          <FormText color="muted">
+            Please make sure the file is in .wav format
+          </FormText>
         </FormGroup>
       </div>
     );

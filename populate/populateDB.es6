@@ -37,25 +37,25 @@ function createEntry(data) {
     }
   });
   localReadStream.pipe(remoteWriteStream)
-  .on('finish', () => {
-    console.log("File uploaded.");
-    db.collection("entries").add({
-      customer: {
-        first_name: data.customerFirstName,
-        last_name: data.customerLastName
-      },
-      sales: {
-        first_name: data.salesFirstName,
-        last_name: data.salesLastName
-      },
-      type: data.type,
-      file: fileName,
-      timestamp: data.timestamp
+    .on('finish', () => {
+      console.log("File uploaded.");
+      db.collection("entries").add({
+          customer: {
+            first_name: data.customerFirstName,
+            last_name: data.customerLastName
+          },
+          sales: {
+            first_name: data.salesFirstName,
+            last_name: data.salesLastName
+          },
+          type: data.type,
+          file: fileName,
+          timestamp: data.timestamp
+        })
+        .then((ref) => {
+          console.log("Document stored", ref.id);
+        })
     })
-    .then((ref) => {
-      console.log("Document stored", ref.id);
-    })
-  })
 }
 
 
@@ -98,7 +98,7 @@ for (var i = 0; i <= 17; i++) {
   data.salesFirstName = names[Math.floor(Math.random() * names.length)];
   data.salesLastName = names[Math.floor(Math.random() * names.length)];
   data.type = 'conversation';
-  let j = i%18
+  let j = i % 18
   data.file_path = path.join(__dirname, 'data', j + '.mp3');
   data.file_name = j + '.mp3'
   // console.log(data);

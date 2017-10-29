@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {
   Row,
   Col,
@@ -7,23 +8,32 @@ import {
   CardTitle,
   CardBody,
   Button,
-  Table
+  Table,
+  Modal
 } from 'reactstrap';
 
 import Header from './header';
 import Stats from './stats';
 import EntriesTable from './entriesTable';
+import AddEntry from './AddEntry'
 
-import * as actions from '../actions/entries';
+import * as entriesActions from '../actions/entries';
+import * as modalActions from '../actions/modal'
 
 class Entries extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.props.actions.modalActions.toggleAddModal();
   }
 
   componentWillMount() {
-    this.props.fetchEntries();
+    this.props.actions.entriesActions.fetchEntries();
   }
 
   render() {
@@ -37,18 +47,25 @@ class Entries extends Component {
           <main className="main">
             <div className="container-fluid">
               <div className="animated fadeIn">
-                <div>
-
-                </div>
                 <Stats values={values}/>
                 <EntriesTable entries={this.props.entries}/>
+                <Modal isOpen={this.props.addModal} toggle={this.toggle} className={this.props.className}>
+                  <AddEntry/>
+                </Modal>
               </div>
             </div>
           </main>
         </div>
         <div className="footer-fixed">
           <div className="app-footer">
-            <Button color="primary" size="lg" className="float-right">Analyser!</Button>
+            <Row>
+              <Col>
+                <Button color="success" size="lg" className="float-left" onClick={this.toggle}>+</Button>
+              </Col>
+              <Col>
+                <Button color="primary" size="lg" className="float-right">Analyser!</Button>
+              </Col>
+            </Row>
           </div>
         </div>
       </div>
@@ -63,7 +80,19 @@ class Entries extends Component {
 // }
 
 function mapStateToProps(state) {
-  return {entries: state.cs.entries.entries}
+  return {
+    entries: state.cs.entries.entries,
+    addModal: state.cs.modal.add_modal
+  };
 }
 
-export default connect(mapStateToProps, actions)(Entries);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      entriesActions: bindActionCreators(entriesActions, dispatch),
+      modalActions: bindActionCreators(modalActions, dispatch)
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Entries);
