@@ -7728,19 +7728,19 @@ header.navbar {
   flex-direction: row;
   height: 55px;
   padding: 0;
-  background-color: #fff;
+  background-color: #708090;
   border-bottom: 1px solid #cfd8dc; }
   header.navbar .navbar-brand {
     display: inline-block;
-    width: 155px;
+    width: 110px;
     height: 55px;
     padding: 0.5rem 1rem;
     margin-right: 0;
-    background-color: #fff;
+    background-color: #708090;
     background-image: url("../img/logo.png");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 70px auto;
+    background-size: 100px auto;
     border-bottom: 1px solid #cfd8dc; }
   header.navbar .navbar-nav {
     flex-direction: row;
@@ -7751,6 +7751,7 @@ header.navbar {
     margin: 0 !important;
     text-align: center; }
     header.navbar .nav-item .nav-link, header.navbar .nav-item .dropdown-toggle {
+      color: white;
       padding-top: 0;
       padding-bottom: 0; }
       header.navbar .nav-item .nav-link .badge, header.navbar .nav-item .dropdown-toggle .badge {

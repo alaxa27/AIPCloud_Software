@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Router, Switch, Route, Redirect} from 'react-router-dom';
+import {Router, Switch, Route, Redirect, BrowserRouter} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import TestCard from './testCard'
-import Text from './Text/text'
-import Opinion from './Opinion/opinion'
+import Text from './Text'
+import Opinion from './Opinion'
 import { Entries, Entry } from './cs'
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
     const history = createBrowserHistory();
 
     return (
-      <Router history={history}>
+      <BrowserRouter history={history}>
         <Switch>
           <Route path="/test" name="Test" component={TestCard}/>
           <Route path="/text" name="Texte" component={Text} />
@@ -35,7 +35,7 @@ class App extends Component {
           <Route path="/cs/entry/:id" name="Entry" component={Entry} />
           <Redirect from="/" to="/test" />
         </Switch>
-      </Router>
+      </BrowserRouter>
     );
   }
 }

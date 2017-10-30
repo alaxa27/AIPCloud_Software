@@ -33,9 +33,11 @@ class EntriesTable extends Component {
           <td>{entry.type}</td>
           <td>{entry.customer.first_name + ' ' + entry.customer.last_name}</td>
           <td>{entry.sales.first_name + ' ' + entry.sales.last_name}</td>
-          <td>{(entry.timestamp
-              ? entry.timestamp.toString()
-              : null)}</td>
+          <td>
+            {(entry.timestamp
+              ? entry.timestamp.toLocaleString()
+              : null)}
+          </td>
           <td><input type="checkbox" onClick={this.handleCheck}/></td>
         </tr>
       )

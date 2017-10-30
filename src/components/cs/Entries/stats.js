@@ -45,9 +45,10 @@ class Stats extends Component {
           }
         })(v)] += 1;
     })
-    // console.log(values);
-    // console.log(classes[10]);
-    console.log(classes);
+    let labels = []
+    for (var i = 0; i < N; i++) {
+      labels.push(new Date(min + i * range / N).toLocaleDateString())
+    }
 
     let mainChartProps = {
       data: {
@@ -70,7 +71,7 @@ class Stats extends Component {
         scales: {
           xAxes: [{
             type: 'category',
-            labels: Array.from(Array(N).keys())
+            labels: labels
           }],
           yAxes: [
             {
@@ -97,11 +98,6 @@ class Stats extends Component {
       <div>
         <Card>
           <CardBlock>
-            <Row>
-              <Col>
-                <CardTitle>Stats</CardTitle>
-              </Col>
-            </Row>
             <div className="chart-wrapper" style={{
               height: 300 + 'px',
               marginTop: 40 + 'px'

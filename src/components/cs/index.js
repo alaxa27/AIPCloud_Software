@@ -1,11 +1,9 @@
 import 'react-block-ui/style.css';
 
-import Entries from './Entries/entries';
-import Entry from './Entries/entry';
-import AddEntry from './Entries/AddEntry';
+import Entries from './Entries';
+import Entry from './Entry';
 
 export {
   Entries,
-  Entry,
-  AddEntry
+  Entry
 }

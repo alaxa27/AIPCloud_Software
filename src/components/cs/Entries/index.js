@@ -11,8 +11,10 @@ import {
   Table,
   Modal
 } from 'reactstrap';
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
 
-import Header from './header';
+import Header from '../Header';
 import Stats from './stats';
 import EntriesTable from './entriesTable';
 import AddEntry from './AddEntry'
@@ -47,11 +49,13 @@ class Entries extends Component {
           <main className="main">
             <div className="container-fluid">
               <div className="animated fadeIn">
-                <Stats values={values}/>
-                <EntriesTable entries={this.props.entries}/>
-                <Modal isOpen={this.props.addModal} toggle={this.toggle} className={this.props.className}>
-                  <AddEntry/>
-                </Modal>
+                <BlockUi tag="div" blocking={this.props.loading}>
+                  <Stats values={values}/>
+                  <EntriesTable entries={this.props.entries}/>
+                  <Modal isOpen={this.props.addModal} toggle={this.toggle} className={this.props.className}>
+                    <AddEntry/>
+                  </Modal>
+                </BlockUi>
               </div>
             </div>
           </main>
@@ -80,10 +84,7 @@ class Entries extends Component {
 // }
 
 function mapStateToProps(state) {
-  return {
-    entries: state.cs.entries.entries,
-    addModal: state.cs.modal.add_modal
-  };
+  return {entries: state.cs.entries.entries, addModal: state.cs.modal.add_modal, loading: state.cs.entries.loading};
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,8 +1,10 @@
 import {
   FETCH_ENTRY,
   FETCH_ENTRY_FULFILLED,
+  FETCH_ENTRY_REJECTED,
   FETCH_ENTRIES,
   FETCH_ENTRIES_FULFILLED,
+  FETCH_ENTRIES_REJECTED,
   DELETE_ENTRY,
   CREATE_ENTRY,
   CREATE_ENTRY_FULFILLED,
@@ -21,35 +23,58 @@ import db from '../firebase-app'
 
 export function fetchEntries() {
   return dispatch => {
-    db.collection("entries").get().then((snapshot) => {
-      let payload = []
-      snapshot.forEach((doc) => {
-        payload.push(doc.data())
-        payload[payload.length - 1].id = doc.id
-      })
-      dispatch({
-        type: FETCH_ENTRIES_FULFILLED,
-        payload: payload
-      })
+    dispatch({
+      type: FETCH_ENTRIES
     })
+    db.collection("entries")
+      .orderBy("timestamp", "desc")
+      .get()
+      .then((snapshot) => {
+        let payload = []
+        snapshot.forEach((doc) => {
+          payload.push(doc.data())
+          payload[payload.length - 1].id = doc.id
+        })
+        dispatch({
+          type: FETCH_ENTRIES_FULFILLED,
+          payload: payload
+        })
+      })
+      .catch(e => {
+        dispatch({
+          type: FETCH_ENTRIES_REJECTED,
+          payload: e
+        })
+      })
 
   };
 }
 
 export function fetchEntry(id) {
   return dispatch => {
+    dispatch({
+      type: FETCH_ENTRY
+    })
     db.collection("entries").doc(id).get()
       .then(snap => {
         let payload = snap.data()
         payload.id = snap.id
         payload.analysis = {}
-        snap.ref.collection("analysis").get().then((snapshot) => {
+        snap.ref.collection("analysis")
+        .get()
+        .then((snapshot) => {
           snapshot.forEach(an => {
             payload.analysis[an.id] = an.data()
           })
           dispatch({
             type: FETCH_ENTRY_FULFILLED,
             payload: payload
+          })
+        })
+        .catch(e => {
+          dispatch({
+            type: FETCH_ENTRY_REJECTED,
+            payload: e
           })
         })
       })
