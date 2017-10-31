@@ -19,6 +19,7 @@ import 'react-block-ui/style.css';
 
 import Header from '../Header'
 import AudioPlayer from './audioPlayer'
+import Spinner from '../Spinner'
 
 import * as actions from '../actions/entries';
 
@@ -33,7 +34,9 @@ class Entry extends Component {
   }
 
   analyzeEntry() {
-    this.props.analyzeEntry(this.props.match.params.id)
+    if (!(this.props.entry.analyzing || this.props.entry.checked)){
+      this.props.analyzeEntry(this.props.match.params.id)
+    }
   }
 
   renderTranscription() {
@@ -55,7 +58,7 @@ class Entry extends Component {
         )
       })
     } catch (e) {
-      return [ < p > No analysis results yet. < /p>]
+      return [ <p> No analysis results yet. </p>]
     }
   }
 
@@ -113,10 +116,10 @@ class Entry extends Component {
       }
     };
     return (
-      <div className="app header-fixed">
-        <Header />
-        <div className="app-body">
-          <main className="main">
+    <div className="app header-fixed">
+      <Header></Header>
+      <div className="app-body">
+        <main className="main">
             <div className="container-fluid">
               <div className="animated fadeIn">
                 <BlockUi tag="div" blocking={this.props.entry.loading}>
@@ -129,7 +132,12 @@ class Entry extends Component {
                           </CardTitle>
                         </Col>
                         <Col>
-                          <Button color="primary" size="lg" className="float-right" onClick={this.analyzeEntry.bind(this)}>Analyze</Button>
+                          <a>
+                          <Button color="primary" size="lg" className="float-right" onClick={this.analyzeEntry.bind(this)} disabled={this.props.entry.checked}>
+                            {(this.props.entry.checked ? <i className="icon-check icons"></i> :
+                              ( this.props.analyzing || this.props.entry.analyzing ? <Spinner className="spinner-left" isLoading="true"/> : <i className="icon-energy icons"></i>))}
+                          </Button>
+                          </a>
                         </Col>
                       </Row>
                     </CardHeader>
@@ -141,9 +149,6 @@ class Entry extends Component {
                         <Col>
                           {this.props.entry.sales.first_name + ' ' + this.props.entry.sales.last_name}
                         </Col>
-                      </Row>
-                      <Row>
-                        <AudioPlayer/>
                       </Row>
                     </CardBlock>
                   </Card>
@@ -184,6 +189,6 @@ class Entry extends Component {
 }
 
 function mapStateToProps(state) {
-  return {entry: state.cs.entries.entry}
+  return {entry: state.cs.entries.entry, analyzing: state.cs.analysis.analyzing}
 }
 export default connect(mapStateToProps, actions)(Entry);

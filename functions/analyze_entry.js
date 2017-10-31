@@ -11,12 +11,11 @@ function (bucket, data) {
   var entryRef = data.ref;
   var entry = data.data();
 
-  var n = 1;
-  if (entry.analyzed) {
-    n = entry.analyzed + 1;
+  if (entry.analyzing || entry.checked) {
+    return true;
   }
   entryRef.set({
-    analyzed: n },
+    analyzing: true },
   {
     merge: true });
 
@@ -45,6 +44,13 @@ function (bucket, data) {
 
             //Get promise and return promise
 
+          }).
+          catch(function (e) {
+            entryRef.set({
+              analyzing: false },
+            {
+              merge: true });
+
           }));
 
           promises.push((0, _speech_2_text2.default)(tempFilePath, entry.file).
@@ -64,6 +70,13 @@ function (bucket, data) {
             }
             return entryRef.collection("analysis").doc("speech_2_text").set({
               results: results },
+            {
+              merge: true });
+
+          }).
+          catch(function (e) {
+            entryRef.set({
+              analyzing: false },
             {
               merge: true });
 

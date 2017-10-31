@@ -8,6 +8,8 @@ import {
   CardBlock
 } from 'reactstrap';
 
+import Spinner from '../Spinner'
+
 class EntriesTable extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +31,9 @@ class EntriesTable extends Component {
             {(entry.checked
               ? <i className="icon-check icons"></i>
               : null)}
+              <div className="spinner-margin-left">
+                <Spinner isLoading={entry.analyzing} />
+              </div>
           </td>
           <td>{entry.type}</td>
           <td>{entry.customer.first_name + ' ' + entry.customer.last_name}</td>

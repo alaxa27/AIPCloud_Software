@@ -40,7 +40,11 @@ class Entries extends Component {
 
   render() {
     const values = this.props.entries.map((e, key) => {
-      return e.timestamp.getTime();
+      try {
+        return e.timestamp.getTime();
+      } catch (e) {
+        return new Date().getTime();
+      }
     })
     return (
       <div className="app header-fixed">

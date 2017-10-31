@@ -84,13 +84,19 @@ var names = [
 'Dimitri',
 'Eustache',
 'Fabien',
-'Firmin'];
+'Firmin',
+'Benjamin',
+'Pierre',
+'Maxime',
+'Taqiyeddine'];
 
 //- 1e6 -> -1e10
 var timestamp = new Date();
 var customer = {};
-var sales = {};var _loop = function _loop() {
-
+var sales = {};
+var N = 17;
+var j = void 0;
+for (var i = 0; i <= N; i++) {
   var data = {};
   data.timestamp = new Date(Date.now() - 1e10 * Math.random());
   data.customerFirstName = names[Math.floor(Math.random() * names.length)];
@@ -98,17 +104,11 @@ var sales = {};var _loop = function _loop() {
   data.salesFirstName = names[Math.floor(Math.random() * names.length)];
   data.salesLastName = names[Math.floor(Math.random() * names.length)];
   data.type = 'conversation';
-  var j = i % 18;
+  j = Math.round(N * Math.random());
   data.file_path = _path2.default.join(__dirname, 'data', j + '.mp3');
   data.file_name = j + '.mp3';
   // console.log(data);
   console.log(data);
   console.log("--------------------------");
-  if (Math.random() > 0.5) {
-    setTimeout(function () {
-      createEntry(data);
-    }, 60000);
-  } else {
-    createEntry(data);
-  }};for (var i = 0; i <= 17; i++) {_loop();
+  createEntry(data);
 }

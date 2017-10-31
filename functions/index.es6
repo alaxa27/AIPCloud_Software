@@ -30,12 +30,12 @@ export let analyseEntry = functions.https
       return firestore.collection("entries").doc(id).get()
       .then(snap => {
         return analyze_entry(bucket, snap)
-        .then((values) => {
-          res.status(200).send("Analysis completed.");
-        })
-        .catch(e => {
-          res.status(500).send("Error analyzing. Try again later.");
-        })
+      })
+      .then((values) => {
+        res.status(200).send("Analysis completed.");
+      })
+      .catch(e => {
+        res.status(500).send("Error analyzing. Try again later.");
       })
     })
   });

@@ -8,44 +8,50 @@ import fetchSpeech2text from './speech_2_text'
 
 
 export default (bucket, data) => {
-      const entryRef = data.ref;
-      let entry = data.data();
+  const entryRef = data.ref;
+  let entry = data.data();
 
-      let n = 1
-      if (entry.analyzed) {
-        n = entry.analyzed + 1
-      }
-      entryRef.set({
-        analyzed: n
-      }, {
-        merge: true
-      })
-      switch (entry.type) {
-        case 'conversation':
-          {
+  if (entry.analyzing || entry.checked) {
+    return true;
+  }
+  entryRef.set({
+    analyzing: true
+  }, {
+    merge: true
+  })
+  switch (entry.type) {
+    case 'conversation':
+      {
 
-            const filePath = '/entries/conversations/' + entry.file
-            const tempFilePath = path.join(os.tmpdir(), entry.file);
+        const filePath = '/entries/conversations/' + entry.file
+        const tempFilePath = path.join(os.tmpdir(), entry.file);
 
-            return bucket.file(filePath).download({
-                destination: tempFilePath
-              })
-              .then(() => {
-                //Array of promises (needed to do multiple modification to firestore)
-                let promises = [];
+        return bucket.file(filePath).download({
+            destination: tempFilePath
+          })
+          .then(() => {
+              //Array of promises (needed to do multiple modification to firestore)
+              let promises = [];
 
-                promises.push(fetchSoundEmotion(tempFilePath, entry.file)
-                  .then(res => {
-                    const data = res.data
-                    return entryRef.collection("analysis").doc("emotion").set({
-                      results: [data]
-                    }, {
-                      merge: true
-                    })
+              promises.push(fetchSoundEmotion(tempFilePath, entry.file)
+                .then(res => {
+                  const data = res.data
+                  return entryRef.collection("analysis").doc("emotion").set({
+                    results: [data]
+                  }, {
+                    merge: true
+                  })
 
-                    //Get promise and return promise
+                  //Get promise and return promise
 
-                  }))
+                })
+                .catch(e => {
+                  entryRef.set({
+                    analyzing: false
+                  }, {
+                    merge: true
+                  })
+                }))
 
                 promises.push(fetchSpeech2text(tempFilePath, entry.file)
                   .then(res => {
@@ -67,6 +73,13 @@ export default (bucket, data) => {
                     }, {
                       merge: true
                     })
+                  })
+                  .catch(e => {
+                    entryRef.set({
+                      analyzing: false
+                    }, {
+                      merge: true
+                    })
                   }))
                 //for res in results
                 //for each transcript fetchTextSentiment
@@ -75,4 +88,4 @@ export default (bucket, data) => {
               })
           }
       }
-}
+  }

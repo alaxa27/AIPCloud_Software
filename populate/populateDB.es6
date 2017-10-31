@@ -84,13 +84,19 @@ const names = [
   'Dimitri',
   'Eustache',
   'Fabien',
-  'Firmin'
+  'Firmin',
+  'Benjamin',
+  'Pierre',
+  'Maxime',
+  'Taqiyeddine'
 ]
 //- 1e6 -> -1e10
 let timestamp = new Date();
 let customer = {};
 let sales = {};
-for (var i = 0; i <= 17; i++) {
+const N = 17
+let j;
+for (var i = 0; i <= N; i++) {
   let data = {};
   data.timestamp = new Date(Date.now() - 1e10 * Math.random())
   data.customerFirstName = names[Math.floor(Math.random() * names.length)];
@@ -98,7 +104,7 @@ for (var i = 0; i <= 17; i++) {
   data.salesFirstName = names[Math.floor(Math.random() * names.length)];
   data.salesLastName = names[Math.floor(Math.random() * names.length)];
   data.type = 'conversation';
-  let j = i % 18
+  j = Math.round(N * Math.random())
   data.file_path = path.join(__dirname, 'data', j + '.mp3');
   data.file_name = j + '.mp3'
   // console.log(data);

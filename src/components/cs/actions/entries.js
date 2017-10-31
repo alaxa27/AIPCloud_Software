@@ -28,8 +28,7 @@ export function fetchEntries() {
     })
     db.collection("entries")
       .orderBy("timestamp", "desc")
-      .get()
-      .then((snapshot) => {
+      .onSnapshot((snapshot) => {
         let payload = []
         snapshot.forEach((doc) => {
           payload.push(doc.data())
@@ -39,8 +38,7 @@ export function fetchEntries() {
           type: FETCH_ENTRIES_FULFILLED,
           payload: payload
         })
-      })
-      .catch(e => {
+      }, (e) => {
         dispatch({
           type: FETCH_ENTRIES_REJECTED,
           payload: e
@@ -55,8 +53,8 @@ export function fetchEntry(id) {
     dispatch({
       type: FETCH_ENTRY
     })
-    db.collection("entries").doc(id).get()
-      .then(snap => {
+    db.collection("entries").doc(id)
+      .onSnapshot(snap => {
         let payload = snap.data()
         payload.id = snap.id
         payload.analysis = {}

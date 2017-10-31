@@ -29,13 +29,13 @@ onRequest(function (req, res) {
 
     return firestore.collection("entries").doc(id).get().
     then(function (snap) {
-      return (0, _analyze_entry2.default)(bucket, snap).
-      then(function (values) {
-        res.status(200).send("Analysis completed.");
-      }).
-      catch(function (e) {
-        res.status(500).send("Error analyzing. Try again later.");
-      });
+      return (0, _analyze_entry2.default)(bucket, snap);
+    }).
+    then(function (values) {
+      res.status(200).send("Analysis completed.");
+    }).
+    catch(function (e) {
+      res.status(500).send("Error analyzing. Try again later.");
     });
   });
 });

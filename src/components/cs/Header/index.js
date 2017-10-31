@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Spinner from '../Spinner';
 
 class Header extends Component {
   constructor(props) {

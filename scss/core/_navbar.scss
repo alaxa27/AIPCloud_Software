@@ -4,6 +4,7 @@ header.navbar {
   height: $navbar-height;
   padding: 0;
   background-color: $navbar-bg;
+  box-shadow: rgba(0, 0, 0, 0.137255) 0px 3px 4px 0px, rgba(0, 0, 0, 0.117647) 0px 3px 3px -2px, rgba(0, 0, 0, 0.2) 0px 1px 8px 0px;
   @include borders($navbar-border);
 
 
