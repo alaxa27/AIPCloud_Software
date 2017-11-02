@@ -33,7 +33,7 @@ class App extends Component {
           <Route path="/opinion" name="Opinion" component={Opinion} />
           <Route path="/cs/entries" name="Entries" component={Entries} />
           <Route path="/cs/entry/:id" name="Entry" component={Entry} />
-          <Redirect from="/" to="/test" />
+          <Redirect from="/" to="/cs/entries" />
         </Switch>
       </BrowserRouter>
     );

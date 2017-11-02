@@ -1,0 +1,109 @@
+[debug] [2017-11-02T15:34:31.385Z] ----------------------------------------------------------------------
+[debug] [2017-11-02T15:34:31.389Z] Command:       /usr/bin/node /usr/bin/firebase deploy
+[debug] [2017-11-02T15:34:31.389Z] CLI Version:   3.13.1
+[debug] [2017-11-02T15:34:31.390Z] Platform:      linux
+[debug] [2017-11-02T15:34:31.390Z] Node Version:  v6.11.3
+[debug] [2017-11-02T15:34:31.390Z] Time:          Thu Nov 02 2017 16:34:31 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:31.390Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-11-02T15:34:31.405Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-11-02T15:34:31.406Z] > authorizing via signed-in user
+[debug] [2017-11-02T15:34:31.409Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/aipsoft-ce792  
+ Thu Nov 02 2017 16:34:31 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:32.310Z] <<< HTTP RESPONSE 200
+[debug] [2017-11-02T15:34:32.312Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/aipsoft-ce792/tokens  
+ Thu Nov 02 2017 16:34:32 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:32.939Z] <<< HTTP RESPONSE 200
+[info] 2
+[info] 
+[info] === Deploying to 'aipsoft-ce792'...
+[info] 
+[info] i  deploying functions, hosting
+[debug] [2017-11-02T15:34:34.624Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "@google-cloud/storage": "^1.4.0",
+    "axios": "^0.17.0",
+    "bluebird": "^3.5.1",
+    "cors": "^2.8.4",
+    "ffmpeg-static": "^2.0.0",
+    "firebase-admin": "^5.4.2",
+    "firebase-functions": "^0.7.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "form-data": "^2.3.1"
+  },
+  "scripts": {
+    "prepare": "babel ./*.es6 --presets es2015 --retain-lines -d ./",
+    "serve": "(babel ./*.es6 --presets es2015 --retain-lines -d ./ --watch&) && cd ../ && firebase serve --only functions"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] [2017-11-02T15:34:34.627Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/aipsoft-ce792?view=CONSUMER_VIEW  
+ Thu Nov 02 2017 16:34:34 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:34.627Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/aipsoft-ce792?view=CONSUMER_VIEW  
+ Thu Nov 02 2017 16:34:34 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:36.219Z] <<< HTTP RESPONSE 200
+[info] ✔  runtimeconfig: all necessary APIs are enabled
+[debug] [2017-11-02T15:34:36.298Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2017-11-02T15:34:36.300Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/aipsoft-ce792  
+ Thu Nov 02 2017 16:34:36 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:36.301Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/aipsoft-ce792/apiKeys  
+ Thu Nov 02 2017 16:34:36 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:37.279Z] <<< HTTP RESPONSE 200
+[debug] [2017-11-02T15:34:37.330Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2017-11-02T15:34:41.300Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/aipsoft-ce792/configs  
+ Thu Nov 02 2017 16:34:41 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:42.206Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (12.71 KB) for uploading
+[debug] [2017-11-02T15:34:45.962Z] >>> HTTP REQUEST GET https://www.googleapis.com/storage/v1/b/staging.aipsoft-ce792.appspot.com  
+ Thu Nov 02 2017 16:34:45 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:46.402Z] <<< HTTP RESPONSE 200
+[debug] [2017-11-02T15:34:46.404Z] >>> HTTP REQUEST POST https://www.googleapis.com/upload/storage/v1/b/staging.aipsoft-ce792.appspot.com/o?uploadType=media&name=firebase-functions-source ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 13014,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: true,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     defaultEncoding: 'utf8',
+     ranOut: false,
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/tmp/firebase-functions-4203nkMu08rLiLkj.zip',
+  fd: 15,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined,
+  bytesRead: 13014 } 
+ Thu Nov 02 2017 16:34:46 GMT+0100 (CET)
+[debug] [2017-11-02T15:34:47.848Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  hosting: preparing build directory for upload...
+[debug] [2017-11-02T15:34:48.825Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/aipsoft-ce792/uploads/-KxxMej7u09tfAFw55GU?fileCount=28&message=  
+ Thu Nov 02 2017 16:34:48 GMT+0100 (CET)

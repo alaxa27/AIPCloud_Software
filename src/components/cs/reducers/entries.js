@@ -21,23 +21,7 @@ const entry = {
     last_name: ""
   },
   timestamp: new Date(),
-  analysis: {
-    speech_2_text: {
-      results: []
-    },
-    emotion: {
-      results: [{
-        angry: 0,
-        calm: 0,
-        disgust: 0,
-        fearful: 0,
-        happy: 0,
-        neutral: 0,
-        sad: 0,
-        surprise: 0
-      }]
-    }
-  }
+  file: ""
 };
 
 

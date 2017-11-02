@@ -21,6 +21,8 @@ import axios from 'axios'
 import firebase from 'firebase'
 import db from '../firebase-app'
 
+import { fetchS2T, fetchEmotion } from './analysis'
+
 export function fetchEntries() {
   return dispatch => {
     dispatch({
@@ -57,23 +59,17 @@ export function fetchEntry(id) {
       .onSnapshot(snap => {
         let payload = snap.data()
         payload.id = snap.id
-        payload.analysis = {}
-        snap.ref.collection("analysis")
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach(an => {
-            payload.analysis[an.id] = an.data()
-          })
-          dispatch({
-            type: FETCH_ENTRY_FULFILLED,
-            payload: payload
-          })
+
+        dispatch(fetchS2T(id));
+        dispatch(fetchEmotion(id));
+        dispatch({
+          type: FETCH_ENTRY_FULFILLED,
+          payload: payload
         })
-        .catch(e => {
-          dispatch({
-            type: FETCH_ENTRY_REJECTED,
-            payload: e
-          })
+      }, e => {
+        dispatch({
+          type: FETCH_ENTRY_REJECTED,
+          payload: e
         })
       })
   }
