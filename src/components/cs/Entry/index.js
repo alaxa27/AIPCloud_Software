@@ -1,43 +1,60 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {
   Row,
   Col,
+  Modal,
+  ModalHeader,
+  ModalFooter,
   Card,
-  CardBlock,
   CardBody,
   CardHeader,
   CardFooter,
   CardTitle,
   Button,
+  ButtonGroup,
   Table,
   Progress
 } from 'reactstrap';
 import {Radar} from 'react-chartjs-2'
 import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
 
 import Header from '../Header'
 import AudioPlayer from './audioPlayer'
 import WaveForm from './waveform'
 import Spinner from '../Spinner'
 
-import * as actions from '../actions/entries';
+import * as entriesActions from '../actions/entries';
+import * as modalActions from '../actions/modal'
+
 
 class Entry extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.deleteEntry = this.deleteEntry.bind(this);
   }
 
   componentWillMount() {
-    this.props.fetchEntry(this.props.match.params.id);
+    this.props.actions.entriesActions.fetchEntry(this.props.match.params.id);
+  }
+
+  toggleDeleteModal() {
+    this.props.actions.modalActions.toggleDeleteModal();
   }
 
   analyzeEntry() {
     if (!(this.props.entry.analyzing || this.props.entry.checked)) {
-      this.props.analyzeEntry(this.props.match.params.id)
+      this.props.entriesActions.analyzeEntry(this.props.entry.id)
     }
+  }
+
+  deleteEntry() {
+    this.props.actions.entriesActions.deleteEntry(this.props.entry.id)
+    this.props.history.push('/cs/entries');
   }
 
   renderTranscription() {
@@ -127,15 +144,18 @@ class Entry extends Component {
                         </CardTitle>
                       </Col>
                       <Col>
-                        <a>
-                          <Button color="primary" size="lg" className="float-right" onClick={this.analyzeEntry.bind(this)} disabled={this.props.entry.checked}>
+                        <ButtonGroup className="float-right">
+                          <Button color="danger" size="lg" onClick={this.toggleDeleteModal}>
+                            <i className="icon-trash icons"></i>
+                          </Button>
+                          <Button color="primary" size="lg" onClick={this.analyzeEntry.bind(this)} disabled={this.props.entry.checked}>
                             {(this.props.entry.checked
                               ? <i className="icon-check icons"></i>
                               : (this.props.analyzing || this.props.entry.analyzing
                                 ? <Spinner className="spinner-left" isLoading="true"/>
                                 : <i className="icon-energy icons"></i>))}
                           </Button>
-                        </a>
+                      </ButtonGroup>
                       </Col>
                     </Row>
                   </CardHeader>
@@ -155,28 +175,37 @@ class Entry extends Component {
                   <Col>
                     <Card>
                       <CardHeader tag="h5">Transcription</CardHeader>
-                      <CardBlock>
+                      <CardBody>
                         <Table hover bordered>
                           <tbody>
                             {this.renderTranscription()}
                           </tbody>
                         </Table>
-                      </CardBlock>
+                      </CardBody>
                     </Card>
                   </Col>
                   <Col>
                     <Card>
                       <CardHeader tag="h5">Emotion through time</CardHeader>
-                      <CardBlock>
+                      <CardBody>
                         <div className="chart-wrapper">
                           {(!this.props.entry.loading
                             ? <Radar {...radar}/>
                             : 'Loading...')}
                         </div>
-                      </CardBlock>
+                      </CardBody>
                     </Card>
                   </Col>
                 </Row>
+                <Modal isOpen={this.props.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+                  <ModalHeader>
+                    Delete entry
+                  </ModalHeader>
+                  <ModalFooter>
+                    <Button color="danger" onClick={this.deleteEntry}>Delete</Button>{' '}
+                    <Button color="secondary" onClick={this.toggleDeleteModal}>Cancel</Button>
+                  </ModalFooter>
+                </Modal>
               </BlockUi>
             </div>
           </div>
@@ -192,7 +221,18 @@ function mapStateToProps(state) {
     entry: state.cs.entries.entry,
     analyzing: state.cs.analysis.analyzing,
     emotion: state.cs.analysis.emotion,
-    speech_2_text: state.cs.analysis.speech_2_text
+    speech_2_text: state.cs.analysis.speech_2_text,
+    deleteModal: state.cs.modal.delete_modal
   }
 }
-export default connect(mapStateToProps, actions)(Entry);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      entriesActions: bindActionCreators(entriesActions, dispatch),
+      modalActions: bindActionCreators(modalActions, dispatch)
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Entry);

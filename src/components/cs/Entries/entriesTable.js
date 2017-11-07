@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import {Input, Row, Col, Card, CardBody} from 'reactstrap';
 import {
   Table,
-  Input,
-  Row,
-  Col,
-  Card,
-  CardBlock
-} from 'reactstrap';
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
 
 import Spinner from '../Spinner'
 
@@ -23,28 +24,27 @@ class EntriesTable extends Component {
   renderEntries() {
     return this.props.entries.map((entry, key) => {
       return (
-        <tr key={entry.id}>
-          <th scope="row">
+        <TableRow key={entry.id}>
+          <TableRowColumn>
             <a href={"/cs/entry/" + entry.id}>{entry.id}</a>
-          </th>
-          <td>
+          </TableRowColumn>
+          <TableRowColumn>
             {(entry.checked
               ? <i className="icon-check icons"></i>
               : null)}
-              <div className="spinner-margin-left">
-                <Spinner isLoading={entry.analyzing} />
-              </div>
-          </td>
-          <td>{entry.type}</td>
-          <td>{entry.customer.first_name + ' ' + entry.customer.last_name}</td>
-          <td>{entry.sales.first_name + ' ' + entry.sales.last_name}</td>
-          <td>
+            <div>
+              <Spinner isLoading={entry.analyzing}/>
+            </div>
+          </TableRowColumn>
+          <TableRowColumn>{entry.type}</TableRowColumn>
+          <TableRowColumn>{entry.customer.first_name + ' ' + entry.customer.last_name}</TableRowColumn>
+          <TableRowColumn>{entry.sales.first_name + ' ' + entry.sales.last_name}</TableRowColumn>
+          <TableRowColumn>
             {(entry.timestamp
               ? entry.timestamp.toLocaleString()
               : null)}
-          </td>
-          <td><input type="checkbox" onClick={this.handleCheck}/></td>
-        </tr>
+          </TableRowColumn>
+        </TableRow>
       )
     })
   }
@@ -52,30 +52,29 @@ class EntriesTable extends Component {
   render() {
     return (
       <Card>
-        <CardBlock>
+        <CardBody>
           <Row>
             <Col>
-              <Table hover className="text-center">
-                <thead className="thead-default">
-                  <tr>
-                    <th className="text-center">ID</th>
-                    <th className="text-center">
+              <Table fixedHeader fixedFooter multiSelectable height={'540px'}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHeaderColumn>ID</TableHeaderColumn>
+                    <TableHeaderColumn>
                       <i className="icon-check icons font-2xl d-block mt-4"></i>
-                    </th>
-                    <th className="text-center">Type</th>
-                    <th className="text-center">Customer</th>
-                    <th className="text-center">Sales</th>
-                    <th className="text-center">Timestamp</th>
-                    <th className="text-center"><input type="checkbox"/></th>
-                  </tr>
-                </thead>
-                <tbody>
+                    </TableHeaderColumn>
+                    <TableHeaderColumn>Type</TableHeaderColumn>
+                    <TableHeaderColumn>Customer</TableHeaderColumn>
+                    <TableHeaderColumn>Sales</TableHeaderColumn>
+                    <TableHeaderColumn>Timestamp</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody showRowHover>
                   {this.renderEntries()}
-                </tbody>
+                </TableBody>
               </Table>
             </Col>
           </Row>
-        </CardBlock>
+        </CardBody>
       </Card>
     );
   }

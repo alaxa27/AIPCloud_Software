@@ -21,7 +21,10 @@ import axios from 'axios'
 import firebase from 'firebase'
 import db from '../firebase-app'
 
-import { fetchS2T, fetchEmotion } from './analysis'
+import {
+  fetchS2T,
+  fetchEmotion
+} from './analysis'
 
 export function fetchEntries() {
   return dispatch => {
@@ -57,15 +60,17 @@ export function fetchEntry(id) {
     })
     db.collection("entries").doc(id)
       .onSnapshot(snap => {
-        let payload = snap.data()
-        payload.id = snap.id
+        if (snap.exists) {
+          let payload = snap.data()
+          payload.id = snap.id
 
-        dispatch(fetchS2T(id));
-        dispatch(fetchEmotion(id));
-        dispatch({
-          type: FETCH_ENTRY_FULFILLED,
-          payload: payload
-        })
+          dispatch(fetchS2T(id));
+          dispatch(fetchEmotion(id));
+          dispatch({
+            type: FETCH_ENTRY_FULFILLED,
+            payload: payload
+          })
+        }
       }, e => {
         dispatch({
           type: FETCH_ENTRY_REJECTED,
@@ -138,6 +143,18 @@ export function createEntry(data) {
           })
         })
       })
+  }
+}
+
+export function deleteEntry(id) {
+  return dispatch => {
+    db.collection("entries").doc(id).delete()
+      .then(function() {
+        console.log("Document successfully deleted!");
+      })
+      .catch(function(error) {
+        console.error("Error removing document: ", error);
+      });
   }
 }
 

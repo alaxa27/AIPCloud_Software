@@ -18,11 +18,13 @@ export function fetchS2T(id) {
     })
     db.collection("entries").doc(id).collection("analysis").doc("speech_2_text")
       .onSnapshot(snap => {
-        let payload = snap.data()
-        dispatch({
-          type: FETCH_S2T_FULFILLED,
-          payload: payload
-        })
+        if (snap.exists) {
+          let payload = snap.data()
+          dispatch({
+            type: FETCH_S2T_FULFILLED,
+            payload: payload
+          })
+        }
       }, e => {
         dispatch({
           type: FETCH_S2T_REJECTED,
@@ -39,11 +41,13 @@ export function fetchEmotion(id) {
     })
     db.collection("entries").doc(id).collection("analysis").doc("emotion")
       .onSnapshot(snap => {
-        let payload = snap.data()
-        dispatch({
-          type: FETCH_EMOTION_FULFILLED,
-          payload: payload
-        })
+        if (snap.exists) {
+          let payload = snap.data()
+          dispatch({
+            type: FETCH_EMOTION_FULFILLED,
+            payload: payload
+          })
+        }
       }, e => {
         dispatch({
           type: FETCH_EMOTION_REJECTED,

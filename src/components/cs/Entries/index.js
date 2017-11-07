@@ -30,12 +30,12 @@ class Entries extends Component {
     this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.props.actions.modalActions.toggleAddModal();
-  }
-
   componentWillMount() {
     this.props.actions.entriesActions.fetchEntries();
+  }
+
+  toggle() {
+    this.props.actions.modalActions.toggleAddModal();
   }
 
   render() {
