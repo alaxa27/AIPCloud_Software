@@ -4,7 +4,9 @@ import {
   FETCH_S2T_REJECTED,
   FETCH_EMOTION,
   FETCH_EMOTION_FULFILLED,
-  FETCH_EMOTION_REJECTED
+  FETCH_EMOTION_REJECTED,
+  UPDATE_SELECTED_ENTRIES,
+  RESET_SELECTED_ENTRIES
 } from './types';
 
 import firebase from 'firebase'
@@ -54,5 +56,32 @@ export function fetchEmotion(id) {
           payload: e
         })
       })
+  }
+}
+
+export function updateSelectedEntries(entries, selectedEntries) {
+  let payload = [];
+  if (selectedEntries === "all") {
+    payload = entries.map((entry, key) => {
+      return entry.id
+    })
+  } else {
+    payload = selectedEntries.map((selection, key) => {
+      return entries[selection].id
+    })
+  }
+  return dispatch => {
+    dispatch({
+      type: UPDATE_SELECTED_ENTRIES,
+      payload: payload
+    })
+  }
+}
+
+export function resetSelectedEntries() {
+  return dispatch => {
+    dispatch({
+      type: RESET_SELECTED_ENTRIES
+    })
   }
 }

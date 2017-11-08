@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import WaveSurfer from 'wavesurfer.js';
 import {Button, Row, Col} from 'reactstrap';
 import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
 
 class WaveForm extends Component {
   constructor(props) {
@@ -40,7 +39,6 @@ class WaveForm extends Component {
     this.setState({pos: e.originalArgs[0]});
   }
   render() {
-    console.log(this.wavesurfer);
     return (
       <BlockUi tag="div" blocking={this.state.loading}>
         <Row>

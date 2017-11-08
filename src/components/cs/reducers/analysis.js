@@ -7,7 +7,9 @@ import {
   FETCH_S2T_REJECTED,
   FETCH_EMOTION,
   FETCH_EMOTION_FULFILLED,
-  FETCH_EMOTION_REJECTED
+  FETCH_EMOTION_REJECTED,
+  UPDATE_SELECTED_ENTRIES,
+  RESET_SELECTED_ENTRIES
 } from '../actions/types';
 
 const speech_2_text = {
@@ -63,6 +65,16 @@ export default function(state = {
       return {
         ...state,
         emotion: action.payload
+      }
+    case UPDATE_SELECTED_ENTRIES:
+      return {
+        ...state,
+        selected_entries: action.payload
+      }
+    case RESET_SELECTED_ENTRIES:
+      return {
+        ...state,
+        selected_entries: []
       }
   }
 

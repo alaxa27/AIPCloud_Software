@@ -8,19 +8,23 @@ import {
   CardTitle,
   CardBody,
   Button,
+  ButtonGroup,
   Table,
-  Modal
+  Modal,
+  Alert
 } from 'reactstrap';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
+import { Menu, MainButton, ChildButton } from 'react-mfb';
+import 'react-mfb/mfb.css';
 
 import Header from '../Header';
 import Stats from './stats';
 import EntriesTable from './entriesTable';
-import AddEntry from './AddEntry'
+import AddEntry from './AddEntry';
 
 import * as entriesActions from '../actions/entries';
-import * as modalActions from '../actions/modal'
+import * as modalActions from '../actions/modal';
 
 class Entries extends Component {
   constructor(props) {
@@ -46,6 +50,10 @@ class Entries extends Component {
         return new Date().getTime();
       }
     })
+        // demo defaults
+    const effect = 'zoomin',
+        pos = 'br',
+        method = 'hover';
     return (
       <div className="app header-fixed">
         <Header/>
@@ -54,6 +62,11 @@ class Entries extends Component {
             <div className="container-fluid">
               <div className="animated fadeIn">
                 <BlockUi tag="div" blocking={this.props.loading}>
+                  {(this.props.deletingEntry ?
+                  <Alert color="success">
+                    Entry successfully deleted!
+                  </Alert>
+                  : null)}
                   <Stats values={values}/>
                   <EntriesTable entries={this.props.entries}/>
                   <Modal isOpen={this.props.addModal} toggle={this.toggle} className={this.props.className}>
@@ -64,23 +77,41 @@ class Entries extends Component {
             </div>
           </main>
         </div>
-        <div className="footer-fixed">
-          <div className="app-footer">
-            <Row>
-              <Col>
-                <Button color="success" size="lg" className="float-left" onClick={this.toggle}>+</Button>
-              </Col>
-              <Col>
-                <Button color="primary" size="lg" className="float-right">Analyser!</Button>
-              </Col>
-            </Row>
-          </div>
-        </div>
+        <Menu effect="zoomin" method="hover" position="br">
+          <MainButton iconResting="icons icon-arrow-up" iconActive="icons icon-arrow-down" />
+          <ChildButton
+            icon="icons icon-energy"
+            label="Analyze selected entries"
+            className="btn-primary"
+            href="#" />
+          <ChildButton
+            icon="icons icon-plus"
+            label="Add an entry"
+            href="#"
+            className="btn-primary"
+            onClick={this.toggle} />
+        </Menu>
       </div>
     );
   }
 }
 
+// <div className="footer-fixed">
+//   <div className="app-footer">
+//     <Row>
+//       <Col>
+//         <ButtonGroup className="float-right">
+//           <Button color="dark" size="lg" onClick={this.toggle}>
+//             <i className="icon-plus icons"></i>
+//           </Button>
+//           <Button color="primary" size="lg">
+//             <i className="icon-energy icons"></i>
+//           </Button>
+//         </ButtonGroup>
+//       </Col>
+//     </Row>
+//   </div>
+// </div>
 // const mapStateToProps = (state) => {
 //   return {
 //     entries: state.entries
@@ -88,7 +119,7 @@ class Entries extends Component {
 // }
 
 function mapStateToProps(state) {
-  return {entries: state.cs.entries.entries, addModal: state.cs.modal.add_modal, loading: state.cs.entries.loading};
+  return {entries: state.cs.entries.entries, addModal: state.cs.modal.add_modal, loading: state.cs.entries.loading, deletingEntry: state.cs.entries.deleting_entry};
 }
 
 function mapDispatchToProps(dispatch) {

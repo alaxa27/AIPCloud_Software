@@ -6,12 +6,16 @@ import {
   FETCH_ENTRIES_REJECTED,
   FETCH_ENTRY,
   FETCH_ENTRY_FULFILLED,
-  FETCH_ENTRY_REJECTED
+  FETCH_ENTRY_REJECTED,
+  DELETE_ENTRY,
+  DELETE_ENTRY_FULFILLED,
+  DELETE_ENTRY_REJECTED
 } from '../actions/types';
 
 const entry = {
   loading: false,
   checked: null,
+  deleting_entry: true,
   customer: {
     first_name: "",
     last_name: ""
@@ -61,6 +65,21 @@ export default function(state = {
     case FETCH_ENTRY_REJECTED:
       state.entry.loading = false;
       return state;
+    case DELETE_ENTRY:
+      return {
+        ...state,
+        deleting_entry: true
+      }
+    case DELETE_ENTRY_FULFILLED:
+      return {
+        ...state,
+        deleting_entry: false
+      }
+    case DELETE_ENTRY_REJECTED:
+      return {
+        ...state,
+        deleting_entry: false
+      }
   }
 
   return state;

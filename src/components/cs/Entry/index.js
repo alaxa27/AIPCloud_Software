@@ -4,9 +4,6 @@ import {bindActionCreators} from 'redux';
 import {
   Row,
   Col,
-  Modal,
-  ModalHeader,
-  ModalFooter,
   Card,
   CardBody,
   CardHeader,
@@ -21,12 +18,12 @@ import {Radar} from 'react-chartjs-2'
 import BlockUi from 'react-block-ui';
 
 import Header from '../Header'
-import AudioPlayer from './audioPlayer'
 import WaveForm from './waveform'
+import DeleteModal from './deleteModal'
 import Spinner from '../Spinner'
 
 import * as entriesActions from '../actions/entries';
-import * as modalActions from '../actions/modal'
+import * as modalActions from '../actions/modal';
 
 
 class Entry extends Component {
@@ -48,7 +45,7 @@ class Entry extends Component {
 
   analyzeEntry() {
     if (!(this.props.entry.analyzing || this.props.entry.checked)) {
-      this.props.entriesActions.analyzeEntry(this.props.entry.id)
+      this.props.actions.entriesActions.analyzeEntry(this.props.entry.id)
     }
   }
 
@@ -197,15 +194,7 @@ class Entry extends Component {
                     </Card>
                   </Col>
                 </Row>
-                <Modal isOpen={this.props.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-                  <ModalHeader>
-                    Delete entry
-                  </ModalHeader>
-                  <ModalFooter>
-                    <Button color="danger" onClick={this.deleteEntry}>Delete</Button>{' '}
-                    <Button color="secondary" onClick={this.toggleDeleteModal}>Cancel</Button>
-                  </ModalFooter>
-                </Modal>
+                <DeleteModal deleteModal={this.props.deleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteEntry={this.deleteEntry}/>
               </BlockUi>
             </div>
           </div>

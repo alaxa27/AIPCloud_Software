@@ -5,7 +5,6 @@ import {
   FETCH_ENTRIES,
   FETCH_ENTRIES_FULFILLED,
   FETCH_ENTRIES_REJECTED,
-  DELETE_ENTRY,
   CREATE_ENTRY,
   CREATE_ENTRY_FULFILLED,
   CREATE_ENTRY_REJECTED,
@@ -13,7 +12,10 @@ import {
   FETCH_ANALYSIS,
   FETCH_ANALYSIS_FULFILLED,
   FETCH_ANALYSIS_REJECTED,
-  TOGGLE_ADD_MODAL
+  TOGGLE_ADD_MODAL,
+  DELETE_ENTRY,
+  DELETE_ENTRY_FULFILLED,
+  DELETE_ENTRY_REJECTED
 } from './types';
 import guid from '../guid'
 import axios from 'axios'
@@ -148,12 +150,21 @@ export function createEntry(data) {
 
 export function deleteEntry(id) {
   return dispatch => {
+    dispatch({
+      type: DELETE_ENTRY
+    })
     db.collection("entries").doc(id).delete()
       .then(function() {
         console.log("Document successfully deleted!");
+        dispatch({
+          type: DELETE_ENTRY_FULFILLED
+        })
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
+        dispatch({
+          type: DELETE_ENTRY_REJECTED
+        })
       });
   }
 }

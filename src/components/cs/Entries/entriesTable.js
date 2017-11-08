@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Input, Row, Col, Card, CardBody} from 'reactstrap';
 import {
   Table,
@@ -10,6 +12,8 @@ import {
 } from 'material-ui/Table';
 
 import Spinner from '../Spinner'
+
+import * as analysisActions from '../actions/analysis';
 
 class EntriesTable extends Component {
   constructor(props) {
@@ -24,7 +28,7 @@ class EntriesTable extends Component {
   renderEntries() {
     return this.props.entries.map((entry, key) => {
       return (
-        <TableRow key={entry.id}>
+        <TableRow key={key}>
           <TableRowColumn>
             <a href={"/cs/entry/" + entry.id}>{entry.id}</a>
           </TableRowColumn>
@@ -55,7 +59,7 @@ class EntriesTable extends Component {
         <CardBody>
           <Row>
             <Col>
-              <Table fixedHeader fixedFooter multiSelectable height={'540px'}>
+              <Table fixedHeader fixedFooter multiSelectable height={'540px'} onRowSelection={this.props.actions.analysisActions.updateSelectedEntries.bind(this, this.props.entries)}>
                 <TableHeader>
                   <TableRow>
                     <TableHeaderColumn>ID</TableHeaderColumn>
@@ -80,4 +84,12 @@ class EntriesTable extends Component {
   }
 }
 
-export default EntriesTable;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      analysisActions: bindActionCreators(analysisActions, dispatch),
+    }
+  };
+}
+
+export default connect(null, mapDispatchToProps)(EntriesTable);
