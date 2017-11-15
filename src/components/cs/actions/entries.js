@@ -137,6 +137,10 @@ export function createEntry(data) {
             dispatch({
               type: TOGGLE_ADD_MODAL
             })
+            dispatch({
+              type: UPLOAD_STATE_CHANGED,
+              payload: -1
+            })
           }, 1000)
         }).catch((err) => {
           dispatch({

@@ -25,13 +25,14 @@ $ratio:1.2;
 $transition-time:0.3s;
 
 .play {
+  cursor: pointer;
   display:block;
   width: 0;
 	height: 0;
 	border-top: $size solid transparent;
 	border-bottom: $size solid transparent;
 	border-left: ($size*$ratio) solid $foreground;
-  margin: ($size * 2) auto $size auto;
+  margin: 5px;
   position:relative;
   z-index:1;
   transition: all $transition-time;
@@ -85,4 +86,10 @@ $transition-time:0.3s;
       box-shadow:inset ($size*0.6) 0 0 0 $background;
     }
   }
+}
+
+.align-emotion-chart {
+  width: 100%;
+  margin-left: 34px;
+  padding-right: 60px;
 }

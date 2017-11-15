@@ -37,9 +37,7 @@ export default (bucket, data) => {
                 .then(res => {
                   const data = res.data
                   return entryRef.collection("analysis").doc("emotion").set({
-                    results: [data]
-                  }, {
-                    merge: true
+                    results: data.emotion
                   })
 
                   //Get promise and return promise
@@ -57,6 +55,7 @@ export default (bucket, data) => {
                   .then(res => {
                     const results = res.data.results;
                     let proms = [];
+                    //Modify results to be an array of sentences
                     for (var i = 0; i < results.length; i++) {
                       proms.push(fetchTextSentiment(results[i].transcript))
                     }
@@ -70,8 +69,6 @@ export default (bucket, data) => {
                     }
                     return entryRef.collection("analysis").doc("speech_2_text").set({
                       results: results
-                    }, {
-                      merge: true
                     })
                   })
                   .catch(e => {

@@ -8975,13 +8975,14 @@ hr.transparent {
   margin-left: 25px; }
 
 .play {
+  cursor: pointer;
   display: block;
   width: 0;
   height: 0;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 24px solid #2c3e50;
-  margin: 40px auto 20px auto;
+  margin: 5px;
   position: relative;
   z-index: 1;
   transition: all 0.3s;
@@ -9025,6 +9026,11 @@ hr.transparent {
       border-left: 8px solid #2c3e50;
       border-right: 8px solid #2c3e50;
       box-shadow: inset 12px 0 0 0 #f9f9f9; }
+
+.align-emotion-chart {
+  width: 100%;
+  margin-left: 34px;
+  padding-right: 60px; }
 
 .spinner-margin-left {
   margin-left: 15px; }

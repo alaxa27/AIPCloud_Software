@@ -14,7 +14,6 @@ import {
   Table,
   Progress
 } from 'reactstrap';
-import {Radar} from 'react-chartjs-2'
 import BlockUi from 'react-block-ui';
 
 import Header from '../Header'
@@ -78,50 +77,6 @@ class Entry extends Component {
   }
 
   render() {
-    const radar = {
-      options: {
-        scale: {
-          ticks: {
-            min: 0,
-            max: 1
-          }
-        }
-      },
-      data: {
-        labels: [
-          'Angry',
-          'Calm',
-          'Disgust',
-          'Fearful',
-          'Happy',
-          'Neutral',
-          'Sad',
-          'Surprise'
-        ],
-        datasets: [
-          {
-            label: 'Emotion',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
-            pointBackgroundColor: 'rgba(255,99,132,1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(255,99,132,1)',
-            data: [
-              this.props.emotion.results[0].angry,
-              this.props.emotion.results[0].calm,
-              this.props.emotion.results[0].disgust,
-              this.props.emotion.results[0].fearful,
-              this.props.emotion.results[0].happy,
-              this.props.emotion.results[0].neutral,
-              this.props.emotion.results[0].sad,
-              this.props.emotion.results[0].surprise
-            ]
-          }
-        ]
-      }
-    };
-
     const fileURL = "https://firebasestorage.googleapis.com/v0/b/aipsoft-ce792.appspot.com/o/entries%2Fconversations%2F" + this.props.entry.file + "?alt=media&token=3d3b93c7-0b73-4758-b1f3-169f88c5eebd"
 
     return (
@@ -165,11 +120,9 @@ class Entry extends Component {
                         {this.props.entry.sales.first_name + ' ' + this.props.entry.sales.last_name}
                       </Col>
                     </Row>
-                    {(!this.props.entry.loading ? <WaveForm src={fileURL}></WaveForm> : null)}
                   </CardBody>
                 </Card>
-                <Row>
-                  <Col>
+                {(!this.props.entry.loading ? <WaveForm src={fileURL}></WaveForm> : null)}
                     <Card>
                       <CardHeader tag="h5">Transcription</CardHeader>
                       <CardBody>
@@ -180,20 +133,6 @@ class Entry extends Component {
                         </Table>
                       </CardBody>
                     </Card>
-                  </Col>
-                  <Col>
-                    <Card>
-                      <CardHeader tag="h5">Emotion through time</CardHeader>
-                      <CardBody>
-                        <div className="chart-wrapper">
-                          {(!this.props.entry.loading
-                            ? <Radar {...radar}/>
-                            : 'Loading...')}
-                        </div>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
                 <DeleteModal deleteModal={this.props.deleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteEntry={this.deleteEntry}/>
               </BlockUi>
             </div>

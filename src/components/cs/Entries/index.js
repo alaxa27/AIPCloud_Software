@@ -50,10 +50,6 @@ class Entries extends Component {
         return new Date().getTime();
       }
     })
-        // demo defaults
-    const effect = 'zoomin',
-        pos = 'br',
-        method = 'hover';
     return (
       <div className="app header-fixed">
         <Header/>

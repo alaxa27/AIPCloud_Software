@@ -51,6 +51,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && cd functions && npm run prepare && cd ../ && firebase deploy",
-    "dev-deploy": "cd functions && npm run prepare && cd ../ && firebase deploy --only functions"
+    "dev-deploy": "cd functions && npm run prepare && cd ../ && firebase deploy --only functions",
+    "populate": "cd populate && babel ./*.es6 --presets es2015 --retain-lines -d ./ && nodejs populateDB.js"
   }
 }

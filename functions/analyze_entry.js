@@ -37,9 +37,7 @@ function (bucket, data) {
           then(function (res) {
             var data = res.data;
             return entryRef.collection("analysis").doc("emotion").set({
-              results: [data] },
-            {
-              merge: true });
+              results: data.emotion });
 
 
             //Get promise and return promise
@@ -57,6 +55,7 @@ function (bucket, data) {
           then(function (res) {
             var results = res.data.results;
             var proms = [];
+            //Modify results to be an array of sentences
             for (var i = 0; i < results.length; i++) {
               proms.push((0, _text_sentiment2.default)(results[i].transcript));
             }
@@ -69,9 +68,7 @@ function (bucket, data) {
               results[i].sentiment = promsData[i].data;
             }
             return entryRef.collection("analysis").doc("speech_2_text").set({
-              results: results },
-            {
-              merge: true });
+              results: results });
 
           }).
           catch(function (e) {

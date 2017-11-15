@@ -3,8 +3,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Entries from './Entries';
 import Entry from './Entry';
+import Home from './Home';
 
 export {
   Entries,
-  Entry
+  Entry,
+  Home
 }
