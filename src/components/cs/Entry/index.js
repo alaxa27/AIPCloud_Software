@@ -11,7 +11,6 @@ import {
   CardTitle,
   Button,
   ButtonGroup,
-  Table,
   Progress
 } from 'reactstrap';
 import BlockUi from 'react-block-ui';
@@ -58,17 +57,16 @@ class Entry extends Component {
       return this.props.speech_2_text.results.map((line, key) => {
         const sent = line.sentiment;
         return (
-          <tr key={key}>
-            <td>{line.transcript}</td>
-            <td>
-              {"___________________________________________"}
+          <Row key={key}>
+            <Col>{line.transcript}</Col>
+            <Col>
               <Progress multi>
                 <Progress bar color="success" value={(sent.positivity * 100).toFixed(2)}/>
                 <Progress bar color="muted" value={(sent.neutrality * 100).toFixed(2)}/>
                 <Progress bar color="danger" value={(sent.negativity * 100).toFixed(2)}/>
               </Progress>
-            </td>
-          </tr>
+            </Col>
+          </Row>
         )
       })
     } catch (e) {
@@ -114,25 +112,23 @@ class Entry extends Component {
                   <CardBody>
                     <Row>
                       <Col>
+                        Customer: {' '}
                         {this.props.entry.customer.first_name + ' ' + this.props.entry.customer.last_name}
                       </Col>
                       <Col>
+                        Sales: {' '}
                         {this.props.entry.sales.first_name + ' ' + this.props.entry.sales.last_name}
                       </Col>
                     </Row>
                   </CardBody>
                 </Card>
                 {(!this.props.entry.loading ? <WaveForm src={fileURL}></WaveForm> : null)}
-                    <Card>
-                      <CardHeader tag="h5">Transcription</CardHeader>
-                      <CardBody>
-                        <Table hover bordered>
-                          <tbody>
-                            {this.renderTranscription()}
-                          </tbody>
-                        </Table>
-                      </CardBody>
-                    </Card>
+                <Card>
+                  <CardHeader tag="h5">Transcription</CardHeader>
+                  <CardBody>
+                    {this.renderTranscription()}
+                  </CardBody>
+                </Card>
                 <DeleteModal deleteModal={this.props.deleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteEntry={this.deleteEntry}/>
               </BlockUi>
             </div>

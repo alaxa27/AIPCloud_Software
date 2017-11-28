@@ -14,29 +14,29 @@ import './neal/style.min.css'
 import Header from '../Header'
 
 const pricingPlan1 = {
-  name: "Personal",
-  description: "Describe your plans with easy-to-use pricing tables. Each plan provides callbacks to handle visitor clicks.",
-  price: "$99",
+  name: "Medium",
+  description: "Access to AIPCloud as a REST API.",
+  price: "$200",
   features: {
-    "Describe pricing plans as JSON": true,
-    "Features can be active/inactive": true,
-    "Works on mobile": true,
-    "Custom callbacks": true,
-    "Extra Feature 1": false,
-    "Extra Feature 2": false
+    "REST API": true,
+    "Multiple accounts": true,
+    "24/7 Customer Service": false,
+    "Custom Software": false
   }
 };
 
 const pricingPlan2 = Object.assign({}, pricingPlan1, {
   price: "$499",
   name: "Startup",
-  features: Object.assign({}, pricingPlan1.features, {"Extra Feature 1": true})
+  description: "Access to AIPCloud as a REST API. Access to AIPCloud softwares.",
+  features: Object.assign({}, pricingPlan1.features, {"24/7 Customer Service": true})
 });
 
 const pricingPlan3 = Object.assign({}, pricingPlan2, {
-  price: "$999",
-  name: "Enterprise",
-  features: Object.assign({}, pricingPlan2.features, {"Extra Feature 2": true})
+  price: "Undefined",
+  name: "Custom",
+  description: "We build the software you need to work above the API.",
+  features: Object.assign({}, pricingPlan2.features, {"Custom Software": true})
 });
 
 const sampleCode1 = `

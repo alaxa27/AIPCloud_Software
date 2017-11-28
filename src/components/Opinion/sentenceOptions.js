@@ -11,10 +11,10 @@ class SentenceOptions extends Component {
   }
 
   options = [
-        "Dapibus ac facilisis in",
-        "Morbi leo risus",
-        "Porta ac consectetur ac",
-        "Vestibulum at ers"
+        "Vous feriez mieux de raccrocher ! Ce Centre d’appels cherche à vous dissuader d’entrer en communication avec votre dit Service Client.",
+        "Dans le cadre de notre démarche qualité et formation, votre appel est susceptible d’être enregistré.",
+        "Je n’ai aucune solution à vous proposer.",
+        "Je suis vraiment satisfait du service, au revoir et à bientôt."
   ]
 
 

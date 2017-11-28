@@ -1,10 +1,25 @@
 import React, {Component} from 'react';
 import Spinner from '../Spinner';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle
+} from 'reactstrap';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
+  }
+
+    toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
   }
 
   render() {
@@ -22,9 +37,23 @@ class Header extends Component {
           <li className="nav-item px-3">
             <a className="nav-link" href="/cs/entries">Dashboard</a>
           </li>
-          <li className="nav-item px-3">
-            <a className="nav-link" href="#">Settings</a>
-          </li>
+          <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle nav caret>
+              Demo
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>
+                <a href="/text">
+                  Text
+                </a>
+              </DropdownItem>
+              <DropdownItem>
+                <a href="/opinion">
+                  Opinion
+                </a>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </ul>
         <ul className="nav navbar-nav ml-auto">
           <li className="nav-item d-md-down-none">

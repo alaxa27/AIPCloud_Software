@@ -17,6 +17,8 @@ import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 import { Menu, MainButton, ChildButton } from 'react-mfb';
 import 'react-mfb/mfb.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import Header from '../Header';
 import Stats from './stats';
@@ -64,7 +66,9 @@ class Entries extends Component {
                   </Alert>
                   : null)}
                   <Stats values={values}/>
-                  <EntriesTable entries={this.props.entries}/>
+                  <MuiThemeProvider>
+                    <EntriesTable entries={this.props.entries}/>
+                  </MuiThemeProvider>
                   <Modal isOpen={this.props.addModal} toggle={this.toggle} className={this.props.className}>
                     <AddEntry/>
                   </Modal>

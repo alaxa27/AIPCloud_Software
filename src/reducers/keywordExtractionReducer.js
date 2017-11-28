@@ -19,9 +19,9 @@ export default function reducer(state={
       return {...state, fetching: true, fetched: false, extract:[]}
     }
     case "FETCH_KEYWORD_EXTRACTION_FULFILLED": {
-      let extract = action.payload.map(e => {
+      let extract = action.payload.map((e, key) => {
         return({
-          "id": "1751295897__" + e.keyword,
+          "id": "lkjlkjlkj",
           "volume": Math.round(e.score * 10000),
           "label": e.keyword,
           "sentiment" : (e.sentiment ?
@@ -37,7 +37,7 @@ export default function reducer(state={
         })
       })
       extract.push({
-            "id": "1751295897__Béfezkflin",
+            "id": "gregreg",
             "label": "",
             "volume": 1,
             "sentiment": {
