@@ -29,7 +29,7 @@ class Full extends Component {
                 <Route path="/entry/:id" name="Entry" component={Entry} />
                 <Route path="/platform/text" name="Text" component={Text} />
                 <Route path="/platform/opinion" name="Opinion" component={Opinion} />
-                <Redirect from="/" to="/dashboard"/>
+                <Redirect from="/" to="/login"/>
               </Switch>
             </Container>
           </main>
