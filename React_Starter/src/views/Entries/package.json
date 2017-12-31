@@ -1,0 +1,6 @@
+{
+  "name": "Entries",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Entries.js"
+}
