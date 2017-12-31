@@ -19,16 +19,23 @@ export default {
       icon: 'icon-grid',
       children: [
         {
-          icon: 'icon-grid',
           name: 'Text',
-          url: '/platform/text'
+          url: '/platform/text',
+          icon: 'icon-grid'
         },
         {
-          icon: 'icon-grid',
           name: 'Opinion',
-          url: '/platform/opinion'
+          url: '/platform/opinion',
+          icon: 'icon-grid'
         }
       ]
+    },
+    {
+      name: 'Logout',
+      url: '/login',
+      icon: 'icon-logout',
+      class: 'mt-auto',
+      variant: 'danger'
     }
   ]
 };

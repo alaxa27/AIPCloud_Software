@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Card, CardTitle, CardBlock} from 'reactstrap';
+import {Row, Col, Card, CardTitle, CardBody} from 'reactstrap';
 import {Line} from 'react-chartjs-2';
 
 const brandPrimary = '#20a8d8';
@@ -97,14 +97,14 @@ class Stats extends Component {
     return (
       <div>
         <Card>
-          <CardBlock>
+          <CardBody>
             <div className="chart-wrapper" style={{
               height: 300 + 'px',
               marginTop: 40 + 'px'
             }}>
               <Line {...mainChartProps}/>
             </div>
-          </CardBlock>
+          </CardBody>
         </Card>
       </div>
     );
