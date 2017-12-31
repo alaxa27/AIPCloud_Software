@@ -5,7 +5,7 @@ import keywordExtraction from './keywordExtractionReducer';
 import customerAnalysis from './customerAnalysisReducer';
 import intentAnalysis from './intentAnalysisReducer'
 //Customer Service Reducers:
-import cs from '../components/cs/reducers';
+import cs from './cs/';
 
 
 export default combineReducers({

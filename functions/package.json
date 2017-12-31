@@ -8,7 +8,7 @@
     "cors": "^2.8.4",
     "ffmpeg-static": "^2.0.0",
     "firebase-admin": "^5.4.2",
-    "firebase-functions": "^0.7.1",
+    "firebase-functions": "^0.7.5",
     "fluent-ffmpeg": "^2.1.2",
     "form-data": "^2.3.1"
   },
@@ -16,5 +16,9 @@
     "prepare": "babel ./*.es6 --presets es2015 --retain-lines -d ./",
     "serve": "(babel ./*.es6 --presets es2015 --retain-lines -d ./ --watch&) && cd ../ && firebase serve --only functions"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
 }
