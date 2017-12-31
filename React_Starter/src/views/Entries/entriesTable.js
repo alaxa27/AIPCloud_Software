@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Input, Row, Col, Card, CardBody} from 'reactstrap';
@@ -30,7 +31,7 @@ class EntriesTable extends Component {
       return (
         <TableRow key={key}>
           <TableRowColumn>
-            <a href={"/cs/entry/" + entry.id}>{entry.id}</a>
+            <Link to={"/entry/" + entry.id}>{entry.id}</Link>
           </TableRowColumn>
           <TableRowColumn>
             {(entry.checked

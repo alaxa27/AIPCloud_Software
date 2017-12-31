@@ -42,6 +42,7 @@
     "material-ui": "^0.20.0",
     "path": "^0.12.7",
     "react": "16.1.1",
+    "react-audioplayer": "^0.3.1",
     "react-block-ui": "^1.1.1",
     "react-chartjs-2": "^2.6.4",
     "react-dom": "16.1.1",
@@ -54,7 +55,8 @@
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^5.0.0",
     "redux-thunk": "^2.2.0",
-    "simple-line-icons": "2.4.1"
+    "simple-line-icons": "2.4.1",
+    "wavesurfer.js": "^2.0.1"
   },
   "scripts": {
     "dev": "webpack -d --progress --watch --profile --json > compilation-stats.json --env.dev",
