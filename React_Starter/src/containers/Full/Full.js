@@ -10,6 +10,8 @@ import Footer from '../../components/Footer/';
 import Dashboard from '../../views/Dashboard/';
 import Entries from '../../views/Entries';
 import Entry from '../../views/Entry';
+import Text from '../../views/Platform/Text';
+import Opinion from '../../views/Platform/Opinion';
 
 class Full extends Component {
   render() {
@@ -22,9 +24,11 @@ class Full extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
-                <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                <Route path="/entries" name="Entries" component={Entries}/>
-                <Route path="/entry/:id" name="Entry" component={Entry}/>
+                <Route path="/dashboard" name="Dashboard" component={Dashboard} />
+                <Route path="/entries" name="Entries" component={Entries} />
+                <Route path="/entry/:id" name="Entry" component={Entry} />
+                <Route path="/platform/text" name="Text" component={Text} />
+                <Route path="/platform/opinion" name="Opinion" component={Opinion} />
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
